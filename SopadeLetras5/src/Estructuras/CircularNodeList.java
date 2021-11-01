@@ -6,8 +6,18 @@ package Estructuras;
 
 /**
  *
- * @author milca
+ * @author milca & kevin
  */
-public class CircularNodeList {
+public class CircularNodeList <E> {
+    private E content;
+    private CircularNodeList<E> next;
     
+    public CircularNodeList(E content, CircularNodeList<E> next){
+        this.content = content;
+        this.next = next;
+    }
+        
+    public CircularNodeList(E content){
+        this(content, null);
+    }
 }

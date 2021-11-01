@@ -6,8 +6,10 @@ package Estructuras;
 
 /**
  *
- * @author milca
+ * @author milca & kevin
  */
-public class CircularLinkedList {
+public class CircularLinkedList<E> {
+    
+    private CircularNodeList<E> last;
     
 }
