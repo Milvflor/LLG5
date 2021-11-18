@@ -1,32 +1,27 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Estructuras;
 
 /**
  *
- * @author milca & kevin
+ * @author kazp_
  */
-public class CircularLinkedList<E> implements List<E>{
+public class CircularArray <E> implements List<E>{
+    private CircularNodeArray<E> first;
     
-    private CircularNodeList<E> last;
-    private int currentSize;
+    private int col_size;
+    private int row_size;
     
-    public CircularLinkedList(){
-        currentSize = 0;
-    }
-
-    public CircularNodeList<E> getLast(){
-        return this.last;
+    public CircularArray(){
+        col_size = 0;
+        row_size = 0;
     }
     
-    public CircularNodeList<E> getFirst(){
-        return this.last.getNext();
-    }
-    
-    public void setLast(CircularNodeList<E> last){
-        this.last = last;
+    public void addRow(){
+        
     }
 
     @Override
@@ -36,19 +31,7 @@ public class CircularLinkedList<E> implements List<E>{
 
     @Override
     public boolean addLast(E e) {
-        if(e == null){
-            return false;
-        }
-        CircularNodeList<E> new_node = new CircularNodeList<E>(e);
-        
-        new_node.setNext(last.getNext());
-        new_node.setPrevious(last);
-        last.getNext().setPrevious(new_node);
-        last.setNext(new_node);
-        
-        last = new_node;
-              
-        return true;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -94,23 +77,6 @@ public class CircularLinkedList<E> implements List<E>{
     @Override
     public E set(int index, E element) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public String toString(){
-        String string= "";      
-        CircularNodeList<E> current = last.getNext();
-        int i = 0;
-
-        while(current.getContent() != this.last.getContent()){
-            string += "node#" + i + " \t"+current.toString() + "\n";
-            current = current.getNext();
-            i++;
-        }
-        
-        string += "node#" + i + " \t"+current.toString() + "\n";
-        
-        return string;
     }
     
 }
