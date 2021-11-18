@@ -17,6 +17,8 @@ public class CircularLinkedList<E> implements List<E>{
         currentSize = 0;
     }
 
+    public int getCurrentSize(){return this.currentSize;}
+    
     public CircularNodeList<E> getLast(){
         return this.last;
     }
@@ -27,6 +29,7 @@ public class CircularLinkedList<E> implements List<E>{
     
     public void setLast(CircularNodeList<E> last){
         this.last = last;
+        if(this.currentSize == 0){this.currentSize++;}
     }
 
     @Override
@@ -47,6 +50,7 @@ public class CircularLinkedList<E> implements List<E>{
         last.setNext(new_node);
         
         last = new_node;
+        this.currentSize++;
               
         return true;
     }
@@ -103,12 +107,12 @@ public class CircularLinkedList<E> implements List<E>{
         int i = 0;
 
         while(current.getContent() != this.last.getContent()){
-            string += "node#" + i + " \t"+current.toString() + "\n";
+            string += "\t"+current.toString() + "\t";
             current = current.getNext();
             i++;
         }
         
-        string += "node#" + i + " \t"+current.toString() + "\n";
+        string += "\t"+current.toString() + "\t";
         
         return string;
     }
