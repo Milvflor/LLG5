@@ -4,7 +4,9 @@
  */
 package sopadeletras5;
 
+import Estructuras.CircularLinkedList;
 import Estructuras.CircularMatrix;
+import Estructuras.CircularNodeList;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +25,13 @@ public class SopadeLetras5 extends Application {
     public void start(Stage primaryStage) {
         
         CircularMatrix<Integer> matrix = new CircularMatrix<Integer>();
-        matrix.zeros(3, 3, 0);
+        matrix.zeros(4, 5, 0);
+        
+        matrix.setValue(0, 0, 1);
+        matrix.setValue(0, 1, 2);
+        matrix.setValue(1, 0, 3);
+        matrix.setValue(1, 1, 4);
+        CircularNodeList<CircularLinkedList<Integer>> puntero_vertical = matrix.getMatrix().getFirst();       
         
         System.out.println(matrix);
         

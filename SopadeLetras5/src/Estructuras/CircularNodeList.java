@@ -52,6 +52,7 @@ public class CircularNodeList <E> {
 
     @Override
     public String toString() {
+        
         return content.toString();
     }
     

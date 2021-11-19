@@ -21,25 +21,17 @@ public class CircularMatrix<E> {
         for (int i = 0; i < col_size; i++) {
             CircularLinkedList<E> new_row = new CircularLinkedList<E>();
             for (int j = 0; j < row_size; j++) {
-                System.out.println(j);
                 if (j == 0) {
                     new_row.setLast(new CircularNodeList<E>(default_value));
                 } else {
                     new_row.addLast(default_value);
-                }
-                System.out.println(new_row);
-            }
+                }            }
             if (i == 0) {
                 matrix.setLast(new CircularNodeList<CircularLinkedList<E>>(new_row));
             } else {
                 matrix.addLast(new_row);
             }
-            System.out.println("row: "+ new_row.getLast().getContent());
         }
-        
-        System.out.println("col_size: " + matrix.getCurrentSize());
-        System.out.println("row_size: " + matrix.getLast().getContent().getCurrentSize());
-        
     }
 
     public CircularLinkedList<CircularLinkedList<E>> getMatrix() {
@@ -48,22 +40,57 @@ public class CircularMatrix<E> {
 
     @Override
     public String toString() {
-        String string = "";
-        
-        
-        CircularNodeList<CircularLinkedList<E>> last_col = matrix.getLast();
-        CircularNodeList<CircularLinkedList<E>> current_col = last_col.getNext();
-        int i = 0;
-        System.out.println(current_col);
-        while (current_col.getContent() != last_col.getContent()) {
-            string += "col#"  + i + current_col.getContent().toString() + "\n";
-            current_col = current_col.getNext();
-            i++;
+        String string = "\n    |";
+        for (int i = 0; i < matrix.getLast().getContent().getCurrentSize(); i++) {
+            string += "    ";
+            string += (char) ('A' + i);
+            string += "    |";
         }
-
-        string += "col#" + i + current_col.toString() + "\n";
-
+        string += "\n";
+        CircularNodeList<CircularLinkedList<E>> current_pointer = matrix.getFirst();
+        for (int i = 0; i < matrix.getCurrentSize(); i++) {
+            string += "----+";
+            for (int j = 0; j < matrix.getLast().getContent().getCurrentSize(); j++) {
+                string += "---------+";
+            }
+            string += "\n";
+            string += "  " + (i + 1) + " |";
+            CircularNodeList<E> current_data_pointer = current_pointer.getContent().getFirst();
+        
+            for (int j = 0; j < matrix.getLast().getContent().getCurrentSize(); j++) {
+                if (current_data_pointer.getContent().toString().length() < 10) {
+                    int spaces = (9 - current_data_pointer.getContent().toString().length()) / 2;
+                    for (int k = 0; k < spaces; k++) {
+                        string += " ";
+                    }
+                    string += current_data_pointer.getContent();
+                    for (int k = 0; k < (9 - current_data_pointer.getContent().toString().length()) - spaces; k++) {
+                        string += " ";
+                    }
+                } else {
+                    //System.out.println("HEREE");
+                    string += String.valueOf(current_data_pointer.getContent()).substring(0, 9) + "A\n";
+                }
+                string += "|";
+                current_data_pointer = current_data_pointer.getNext();
+            }
+            
+            current_pointer = current_pointer.getNext();
+            string += "\n";
+        }
         return string;
     }
-
+    
+    public void setValue(int col_idx, int row_idx, E value){
+        CircularNodeList<CircularLinkedList<E>> col_pointer = matrix.getFirst();
+        for(int i = 0; i < col_idx; i++){
+            col_pointer = col_pointer.getNext(); 
+        }
+        CircularNodeList<E> row_pointer = col_pointer.getContent().getFirst();
+        for(int i = 0; i < row_idx; i++){
+            row_pointer = row_pointer.getNext();
+        }
+        
+        row_pointer.setContent(value);
+    }
 }
