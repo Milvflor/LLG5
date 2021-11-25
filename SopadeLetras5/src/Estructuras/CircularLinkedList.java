@@ -4,54 +4,75 @@
  */
 package Estructuras;
 
+import java.util.Iterator;
+
 /**
  *
  * @author milca & kevin
  */
-public class CircularLinkedList<E> implements List<E>{
-    
+public class CircularLinkedList<E> implements List<E>, Iterable {
+
     private CircularNodeList<E> last;
+    private CircularNodeList<E> currentPointer;
     private int currentSize;
-    
-    public CircularLinkedList(){
+
+    public CircularLinkedList() {
         currentSize = 0;
     }
 
-    public int getCurrentSize(){return this.currentSize;}
-    
-    public CircularNodeList<E> getLast(){
+    public int getCurrentSize() {
+        return this.currentSize;
+    }
+
+    public CircularNodeList<E> getLast() {
         return this.last;
     }
-    
-    public CircularNodeList<E> getFirst(){
+
+    public CircularNodeList<E> getFirst() {
         return this.last.getNext();
     }
-    
-    public void setLast(CircularNodeList<E> last){
+
+    public void setLast(CircularNodeList<E> last) {
         this.last = last;
-        if(this.currentSize == 0){this.currentSize++;}
+        this.last.setNext(this.last);
+        this.last.setPrevious(this.last);        
     }
 
     @Override
     public boolean addFirst(E e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(e == null){return false;}
+        
+        CircularNodeList<E> new_elem = new CircularNodeList<E>(e);
+        if(this.last != null){       
+            this.last.getNext().setPrevious(new_elem);
+            this.last.setNext(new_elem); 
+        } else {
+            this.setLast(new_elem);
+        }
+        this.currentSize++;
+        return true;
     }
 
     @Override
     public boolean addLast(E e) {
-        if(e == null){
+        if (e == null) {
             return false;
         }
+        
         CircularNodeList<E> new_node = new CircularNodeList<E>(e);
         
-        new_node.setNext(last.getNext());
-        new_node.setPrevious(last);
-        last.getNext().setPrevious(new_node);
-        last.setNext(new_node);
-        
-        last = new_node;
+        if(this.last != null){
+            new_node.setNext(last.getNext());
+            new_node.setPrevious(last);
+            last.getNext().setPrevious(new_node);
+            last.setNext(new_node);
+
+            last = new_node;
+        } else {
+            this.setLast(new_node);
+        }
         this.currentSize++;
-              
         return true;
     }
 
@@ -67,17 +88,17 @@ public class CircularLinkedList<E> implements List<E>{
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.currentSize;
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.size() == 0; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.last = null; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -92,29 +113,65 @@ public class CircularLinkedList<E> implements List<E>{
 
     @Override
     public E get(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(index < 0 || index > this.currentSize){
+            return null;
+        }
+        
+        CircularNodeList<E> pointer = this.getFirst();
+        
+        for(int i = 0; i < index; i++){
+            pointer = pointer.getNext();
+        }
+        return pointer.getContent();
     }
 
     @Override
-    public E set(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean set(int index, E element) {
+        if(index < 0 || index > this.currentSize){
+            return false;
+        }
+        
+        CircularNodeList<E> pointer = this.getFirst();
+        
+        for(int i = 0; i < index; i++){
+            pointer = pointer.getNext();
+        }
+        pointer.setContent(element);
+        return true;
     }
-    
+
     @Override
-    public String toString(){
-        String string= "";      
+    public String toString() {
+        String string = "";
         CircularNodeList<E> current = last.getNext();
         int i = 0;
 
-        while(current.getContent() != this.last.getContent()){
-            string += "\t"+current.toString() + "\t";
+        while (current.getContent() != this.last.getContent()) {
+            string += "\t" + current.toString() + "\t";
             current = current.getNext();
             i++;
         }
-        
-        string += "\t"+current.toString() + "\t";
-        
+
+        string += "\t" + current.toString() + "\t";
+
         return string;
     }
-    
+
+    @Override
+    public Iterator iterator() {
+        Iterator<E> i = new Iterator<E>(){
+            @Override
+            public boolean hasNext() {
+                return true;
+            }
+
+            @Override
+            public E next() {
+                currentPointer = currentPointer.getNext();
+                return currentPointer.getContent();
+            }
+        };
+        return i;
+    }
+
 }

@@ -7,6 +7,7 @@ package sopadeletras5;
 import Estructuras.CircularLinkedList;
 import Estructuras.CircularMatrix;
 import Estructuras.CircularNodeList;
+import Estructuras.List;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,19 +22,17 @@ import javafx.stage.Stage;
  */
 public class SopadeLetras5 extends Application {
     
+    List<List<Character>> matrix;
+    
     @Override
     public void start(Stage primaryStage) {
         
-        CircularMatrix<Integer> matrix = new CircularMatrix<Integer>();
-        matrix.zeros(4, 5, 0);
+        CircularMatrix lista = new CircularMatrix<>();
+        lista.zeros(3, 5, 'a');
         
-        matrix.setValue(0, 0, 1);
-        matrix.setValue(0, 1, 2);
-        matrix.setValue(1, 0, 3);
-        matrix.setValue(1, 1, 4);
-        CircularNodeList<CircularLinkedList<Integer>> puntero_vertical = matrix.getMatrix().getFirst();       
-        
-        System.out.println(matrix);
+        System.out.println(lista);
+        lista.put(0, 0, 'b');
+        System.out.println(lista);
         
         Button btn = new Button();
         btn.setText("Say 'Hello World'");

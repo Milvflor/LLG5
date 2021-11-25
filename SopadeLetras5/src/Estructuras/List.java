@@ -22,6 +22,6 @@ public interface List<E> {
 
     public E get(int index); // retorna el elemento ubicado en la posición index
 
-    public E set(int index, E element); // setea el element en la posición index
+    public boolean set(int index, E element); // setea el element en la posición index
 
 }
