@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import sopadeletras5.Base.Bloque;
 
 /**
  *
@@ -55,9 +56,14 @@ public class Sistema {
         
         btn_jugar=new Button("JUGAR");
         
+        btn_jugar.setOnAction(e->{
+            System.out.println("------------------------------------------------------------------");
+            System.out.println("filas: "+txt_fila.getText()+"\ncolumnas: "+txt_columna.getText());
+        });
+        
         fila1.getChildren().addAll(lbl_fila,txt_fila);
         fila2.getChildren().addAll(lbl_columna,txt_columna);
-        
+
         root.getChildren().addAll(fila1,fila2,btn_jugar);
     }
     
