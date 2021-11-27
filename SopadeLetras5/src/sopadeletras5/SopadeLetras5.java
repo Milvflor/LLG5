@@ -27,8 +27,29 @@ public class SopadeLetras5 extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+                
+        Tablero tablero = new Tablero(5,4);
+        
+        tablero.getMatrix().put(1,2,'Z');
+        System.out.println(tablero.getMatrix());
+        
+        Button btn = new Button();
+        btn.setText("INICIAR");
+        btn.setOnAction(e->{
+            Sistema sistema=new Sistema();
+            primaryStage.setScene(new Scene(sistema.getRoot(),500,500));
+        });
+        
+        StackPane root = new StackPane();
+//        root.getChildren().add(tablero.getGrid());
+        
+        root.getChildren().add(btn);
+        
+        Scene scene = new Scene(root, 900, 600);
+        
 
-        Tablero tablero = new Tablero(5, 4);
+
+     
 
         screenController = new ScreenController(900,600);
 
