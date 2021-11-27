@@ -21,9 +21,10 @@ import javafx.stage.Stage;
  * @author milca
  */
 public class SopadeLetras5 extends Application {
-    
+
     List<List<Character>> matrix;
-    
+    ScreenController screenController;
+
     @Override
     public void start(Stage primaryStage) {
                 
@@ -46,6 +47,28 @@ public class SopadeLetras5 extends Application {
         
         Scene scene = new Scene(root, 900, 600);
         
+
+
+     
+
+//        tablero.getMatrix().put(1,2,'Z');s
+//        System.out.println(tablero.getMatrix());
+//        
+//        Button btn = new Button();
+//        btn.setText("Say 'Hello World'");
+//        btn.setOnAction(new EventHandler<ActionEvent>() {
+//            
+//            @Override
+//            public void handle(ActionEvent event) {
+//                System.out.println("Hello World!");
+//            }
+//        });
+//        
+//        StackPane root = new StackPane();
+//        root.getChildren().add(tablero.getGrid());
+//        
+        screenController = new ScreenController(900,600);
+
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -57,5 +80,5 @@ public class SopadeLetras5 extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

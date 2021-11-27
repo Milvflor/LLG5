@@ -7,7 +7,10 @@ package sopadeletras5;
 
 import Estructuras.ArrayList;
 import Estructuras.List;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -18,26 +21,27 @@ import javafx.stage.Stage;
  * @author kazp_
  */
 public class ScreenController {
-    private Stage root;
+    private Scene context;
     private Pane currentPane;
     
     private List<Pane> panes;
     private int height, width;
 
-    public ScreenController(Stage root, Pane currentPane) {
-        this.root = root;
-        this.currentPane = currentPane;
+    public ScreenController(int height, int width) {
         panes = new ArrayList<>();
         
-        panes.add(0, this.generateMainMenu());
+        panes.addLast(this.generateMainMenu());
         panes.addLast(this.generatePlayground());
         this.setCurrentPane(panes.get(0));
-        this.refreshScene();
+        this.context = new Scene(currentPane, height, width);
     }
     
-    public void refreshScene(){
-        Scene scene = new Scene(this.currentPane, this.height, this.width);
-        root.setScene(scene);
+    public void refreshScene(){        
+        context.setRoot(currentPane);
+    }
+    
+    public void showScene(){
+        
     }
     
     public void changeScene(int id){
@@ -45,12 +49,12 @@ public class ScreenController {
         this.refreshScene();
     }
 
-    public Stage getRoot() {
-        return root;
+    public Scene getContext() {
+        return context;
     }
 
-    public void setRoot(Stage root) {
-        this.root = root;
+    public void setContext(Scene context) {
+        this.context = context;
     }
 
     public Pane getCurrentPane() {
@@ -68,6 +72,16 @@ public class ScreenController {
         
         main.getChildren().add(title);
         
+        Button button = new Button("Cambiar");
+        
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                changeScene(1);
+            }
+        });
+        
+        main.getChildren().add(button);
         return main;
     }
     
