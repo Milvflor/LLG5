@@ -4,6 +4,7 @@
  */
 package sopadeletras5;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -38,16 +39,19 @@ public class Sistema {
     
     public void generarVentana(){
         root=new VBox();
+        root.setAlignment(Pos.CENTER);
         fila1=new HBox();
         fila2=new HBox();
         
         
         
         lbl_fila=new Label("filas");
-        lbl_columna=new Label("columna");
+        lbl_columna=new Label("columnas");
         
         txt_fila=new TextField();
+        txt_fila.setPrefWidth(50);
         txt_columna=new TextField();
+        txt_columna.setPrefWidth(50);
         
         btn_jugar=new Button("JUGAR");
         

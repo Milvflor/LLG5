@@ -11,9 +11,12 @@ import Estructuras.List;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -33,19 +36,30 @@ public class SopadeLetras5 extends Application {
         tablero.getMatrix().put(1,2,'Z');
         System.out.println(tablero.getMatrix());
         
+        Label titulo=new Label("SOPA DE LETRAS");
+        
+        
+        
         Button btn = new Button();
         btn.setText("INICIAR");
         btn.setOnAction(e->{
             Sistema sistema=new Sistema();
-            primaryStage.setScene(new Scene(sistema.getRoot(),500,500));
+            Scene escena1=new Scene(sistema.getRoot(),500,500);
+            escena1.getStylesheets().add("/css/estiloInicio.css");
+            primaryStage.setScene(escena1);
         });
         
         StackPane root = new StackPane();
 //        root.getChildren().add(tablero.getGrid());
         
-        root.getChildren().add(btn);
+
+        VBox columna=new VBox();
+        columna.setAlignment(Pos.CENTER);
+        columna.getChildren().addAll(titulo,btn);
+        root.getChildren().add(columna);
         
         Scene scene = new Scene(root, 900, 600);
+       
         
 
 
@@ -68,8 +82,9 @@ public class SopadeLetras5 extends Application {
 //        root.getChildren().add(tablero.getGrid());
 //        
         screenController = new ScreenController(900,600);
-
-        primaryStage.setTitle("Hello World!");
+        
+        
+        primaryStage.setTitle("SOPA DE LETRAS LGG5");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
