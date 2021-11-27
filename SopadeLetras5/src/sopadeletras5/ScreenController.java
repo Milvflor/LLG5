@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author kazp_
+ * @author Kevin Zhang
  */
 public class ScreenController {
     private Scene context;
@@ -27,6 +27,11 @@ public class ScreenController {
     private List<Pane> panes;
     private int height, width;
 
+    /**
+     *
+     * @param height
+     * @param width
+     */
     public ScreenController(int height, int width) {
         panes = new ArrayList<>();
         
@@ -36,31 +41,57 @@ public class ScreenController {
         this.context = new Scene(currentPane, height, width);
     }
     
+    /**
+     *Permite actualizar la escena si esque el panel actual ha sido modificado
+     */
     public void refreshScene(){        
         context.setRoot(currentPane);
     }
     
+    /**
+     *
+     */
     public void showScene(){
         
     }
     
+    /**
+     *Permite cambiar al panel asociado a dicha id
+     * @param id id de la posicion del panel a ser puesto en escena.
+     */
     public void changeScene(int id){
         this.currentPane = panes.get(id);
         this.refreshScene();
     }
 
+    /**
+     *
+     * @return
+     */
     public Scene getContext() {
         return context;
     }
 
+    /**
+     *
+     * @param context
+     */
     public void setContext(Scene context) {
         this.context = context;
     }
 
+    /**
+     *
+     * @return
+     */
     public Pane getCurrentPane() {
         return currentPane;
     }
 
+    /**
+     *
+     * @param currentPane
+     */
     public void setCurrentPane(Pane currentPane) {
         this.currentPane = currentPane;
     }
@@ -83,6 +114,17 @@ public class ScreenController {
         
         main.getChildren().add(button);
         return main;
+    }
+
+    /**
+     *
+     * @param pane
+     * @return
+     */
+    public int addPane(Pane pane){
+        this.panes.addLast(pane);
+        
+        return this.panes.size() - 1;
     }
     
     private Pane generatePlayground(){

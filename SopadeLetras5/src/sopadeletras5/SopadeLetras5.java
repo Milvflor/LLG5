@@ -5,7 +5,7 @@
 package sopadeletras5;
 
 import Estructuras.CircularLinkedList;
-import Estructuras.CircularMatrix;
+import Modelos.CircularMatrix;
 import Estructuras.CircularNodeList;
 import Estructuras.List;
 import javafx.application.Application;
@@ -65,32 +65,17 @@ public class SopadeLetras5 extends Application {
 
      
 
-//        tablero.getMatrix().put(1,2,'Z');s
-//        System.out.println(tablero.getMatrix());
-//        
-//        Button btn = new Button();
-//        btn.setText("Say 'Hello World'");
-//        btn.setOnAction(new EventHandler<ActionEvent>() {
-//            
-//            @Override
-//            public void handle(ActionEvent event) {
-//                System.out.println("Hello World!");
-//            }
-//        });
-//        
-//        StackPane root = new StackPane();
-//        root.getChildren().add(tablero.getGrid());
-//        
         screenController = new ScreenController(900,600);
-        
-        
+
         primaryStage.setTitle("SOPA DE LETRAS LGG5");
         primaryStage.setScene(scene);
+
         primaryStage.show();
     }
 
     /**
-     * @param args the command line arguments
+     *
+     * @param args
      */
     public static void main(String[] args) {
         launch(args);

@@ -7,7 +7,8 @@ package Estructuras;
 
 /**
  *
- * @author kazp_
+ * @author Kevin Zhang
+ * @param <E>
  */
 public class ArrayList<E> implements List<E> {
     
@@ -16,6 +17,9 @@ public class ArrayList<E> implements List<E> {
     private E[] elements = null;
     private int effectiveSize = 0;
     
+    /**
+     *
+     */
     public ArrayList(){
         this.elements = (E[]) (new Object[capacity]);
         this.effectiveSize = 0;
@@ -34,6 +38,11 @@ public class ArrayList<E> implements List<E> {
         capacity = capacity * 2;
     }
 
+    /**
+     *
+     * @param e
+     * @return
+     */
     @Override
     public boolean addFirst(E e) {
         if(e == null){
@@ -52,6 +61,11 @@ public class ArrayList<E> implements List<E> {
         return true;   
     }
 
+    /**
+     *
+     * @param e
+     * @return
+     */
     @Override
     public boolean addLast(E e) {
         if(e == null){
@@ -64,41 +78,75 @@ public class ArrayList<E> implements List<E> {
         return true;   
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public E removeFirst() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public E removeLast() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int size() {
         return this.effectiveSize;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isEmpty() {
         return this.effectiveSize == 0;
     }
 
+    /**
+     *
+     */
     @Override
     public void clear() {
         this.effectiveSize = 0;
     }
 
+    /**
+     *
+     * @param index
+     * @param element
+     */
     @Override
     public void add(int index, E element) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     @Override
     public E remove(int index) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     @Override
     public E get(int index) {
         if(index > this.size()){
@@ -108,6 +156,12 @@ public class ArrayList<E> implements List<E> {
         return elements[index];
     }
 
+    /**
+     *
+     * @param index
+     * @param element
+     * @return
+     */
     @Override
     public boolean set(int index, E element) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

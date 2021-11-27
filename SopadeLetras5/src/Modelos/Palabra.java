@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sopadeletras5.Base;
-
-import javafx.scene.layout.Pane;
+package Modelos;
 
 /**
  *
  * @author Kevin Zhang
  */
-public class Tile{
+public class Palabra {
     
-    
-    
+        
 }

@@ -33,11 +33,16 @@ public class Sistema {
     
     private Button btn_jugar;
     
-    
+    /**
+     *
+     */
     public Sistema(){
         generarVentana();
     }
     
+    /**
+     *
+     */
     public void generarVentana(){
         root=new VBox();
         root.setAlignment(Pos.CENTER);
@@ -67,14 +72,26 @@ public class Sistema {
         root.getChildren().addAll(fila1,fila2,btn_jugar);
     }
     
+    /**
+     *
+     * @return
+     */
     public VBox getRoot(){
         return root;
     }
 
+    /**
+     *
+     * @return
+     */
     public TextField getTxt_fila() {
         return txt_fila;
     }
 
+    /**
+     *
+     * @return
+     */
     public TextField getTxt_columna() {
         return txt_columna;
     }
