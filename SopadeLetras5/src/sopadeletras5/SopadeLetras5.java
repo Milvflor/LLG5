@@ -33,17 +33,16 @@ public class SopadeLetras5 extends Application {
         System.out.println(tablero.getMatrix());
         
         Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
+        btn.setText("INICIAR");
+        btn.setOnAction(e->{
+            Sistema sistema=new Sistema();
+            primaryStage.setScene(new Scene(sistema.getRoot(),500,500));
         });
         
         StackPane root = new StackPane();
-        root.getChildren().add(tablero.getGrid());
+//        root.getChildren().add(tablero.getGrid());
+        
+        root.getChildren().add(btn);
         
         Scene scene = new Scene(root, 900, 600);
         
