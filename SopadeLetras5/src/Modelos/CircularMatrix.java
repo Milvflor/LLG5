@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Estructuras;
+package Modelos;
+
+import Estructuras.CircularLinkedList;
+import Estructuras.List;
 
 /**
  *

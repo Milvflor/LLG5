@@ -4,6 +4,7 @@
  */
 package sopadeletras5;
 
+import Modelos.CircularMatrix;
 import Estructuras.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -20,8 +21,7 @@ public class Tablero {
     private CircularMatrix matrix;
     private int col, row;
     
-    GridPane grid;
-    
+    GridPane grid;   
 
     public Tablero(int col, int row) {
         this.col = col;

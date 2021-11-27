@@ -84,6 +84,11 @@ public class ScreenController {
         main.getChildren().add(button);
         return main;
     }
+    public int addPane(Pane pane){
+        this.panes.addLast(pane);
+        
+        return this.panes.size() - 1;
+    }
     
     private Pane generatePlayground(){
         VBox main = new VBox();
