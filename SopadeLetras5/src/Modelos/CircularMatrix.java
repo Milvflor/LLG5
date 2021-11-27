@@ -10,16 +10,26 @@ import Estructuras.List;
 
 /**
  *
- * @author kazp_
+ * @author Kevin Zhang
+ * @param <E>
  */
 public class CircularMatrix<E> {
 
     private List<List<E>> matrix = new CircularLinkedList<>();
     
+    /**
+     *
+     */
     public CircularMatrix() {
         matrix = new CircularLinkedList<>();
     }
 
+    /**
+     *
+     * @param col_size
+     * @param row_size
+     * @param default_value
+     */
     public void zeros(int col_size, int row_size, E default_value) {    
         List<E> new_lista;
         for(int i = 0; i < col_size; i++){
@@ -33,10 +43,18 @@ public class CircularMatrix<E> {
         }        
     }
     
+    /**
+     *
+     * @return
+     */
     public List<List<E>> getMatrix() {
         return this.matrix;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         String string = "\n    |";
@@ -79,6 +97,12 @@ public class CircularMatrix<E> {
         return string;
     }
     
+    /**
+     * Este metodo permite añadir un valor en una posicion (i,j)
+     * @param col indice de la columna
+     * @param row indice de la fila 
+     * @param data dato a insertar
+     */
     public void put(int col, int row, E data){
         this.matrix.get(col).set(row, data);
     }

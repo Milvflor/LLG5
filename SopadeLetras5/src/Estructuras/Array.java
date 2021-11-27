@@ -7,10 +7,26 @@ package Estructuras;
 
 /**
  *
- * @author kazp_
+ * @author Kevin Zhang
+ * @param <E>
  */
 public interface Array<E> {  
+
+    /**
+     *
+     * @return
+     */
     public abstract double sortAll();
+
+    /**
+     *
+     */
     public abstract void fillRandom();
+
+    /**
+     *
+     * @param element
+     * @return
+     */
     public abstract int[] binarySearch(E element);
 }

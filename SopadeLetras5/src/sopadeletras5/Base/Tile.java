@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 
 /**
  *
- * @author kazp_
+ * @author Kevin Zhang
  */
 public class Tile{
     

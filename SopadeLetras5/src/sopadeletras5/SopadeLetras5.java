@@ -58,6 +58,10 @@ public class SopadeLetras5 extends Application {
         primaryStage.show();
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

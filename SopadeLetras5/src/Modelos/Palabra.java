@@ -7,7 +7,7 @@ package Modelos;
 
 /**
  *
- * @author kazp_
+ * @author Kevin Zhang
  */
 public class Palabra {
     

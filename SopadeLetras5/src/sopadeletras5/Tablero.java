@@ -23,6 +23,11 @@ public class Tablero {
     
     GridPane grid;   
 
+    /**
+     *
+     * @param col
+     * @param row
+     */
     public Tablero(int col, int row) {
         this.col = col;
         this.row = row;
@@ -48,34 +53,66 @@ public class Tablero {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public CircularMatrix getMatrix() {
         return matrix;
     }
 
+    /**
+     *
+     * @param matrix
+     */
     public void setMatrix(CircularMatrix matrix) {
         this.matrix = matrix;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCol() {
         return col;
     }
 
+    /**
+     *
+     * @param col
+     */
     public void setCol(int col) {
         this.col = col;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getRow() {
         return row;
     }
 
+    /**
+     *
+     * @param row
+     */
     public void setRow(int row) {
         this.row = row;
     }
 
+    /**
+     *
+     * @return
+     */
     public GridPane getGrid() {
         return grid;
     }
 
+    /**
+     *
+     * @param grid
+     */
     public void setGrid(GridPane grid) {
         this.grid = grid;
     }

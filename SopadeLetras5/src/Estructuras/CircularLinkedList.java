@@ -9,6 +9,7 @@ import java.util.Iterator;
 /**
  *
  * @author milca & kevin
+ * @param <E>
  */
 public class CircularLinkedList<E> implements List<E>, Iterable {
 
@@ -16,28 +17,52 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
     private CircularNodeList<E> currentPointer;
     private int currentSize;
 
+    /**
+     *
+     */
     public CircularLinkedList() {
         currentSize = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCurrentSize() {
         return this.currentSize;
     }
 
+    /**
+     *
+     * @return
+     */
     public CircularNodeList<E> getLast() {
         return this.last;
     }
 
+    /**
+     *
+     * @return
+     */
     public CircularNodeList<E> getFirst() {
         return this.last.getNext();
     }
 
+    /**
+     *
+     * @param last
+     */
     public void setLast(CircularNodeList<E> last) {
         this.last = last;
         this.last.setNext(this.last);
         this.last.setPrevious(this.last);        
     }
 
+    /**
+     *
+     * @param e
+     * @return
+     */
     @Override
     public boolean addFirst(E e) {
         
@@ -54,6 +79,11 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
         return true;
     }
 
+    /**
+     *
+     * @param e
+     * @return
+     */
     @Override
     public boolean addLast(E e) {
         if (e == null) {
@@ -76,41 +106,75 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public E removeFirst() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public E removeLast() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int size() {
         return this.currentSize;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isEmpty() {
         return this.size() == 0; //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     */
     @Override
     public void clear() {
         this.last = null; //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param index
+     * @param element
+     */
     @Override
     public void add(int index, E element) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     @Override
     public E remove(int index) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     @Override
     public E get(int index) {
         if(index < 0 || index > this.currentSize){
@@ -125,6 +189,12 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
         return pointer.getContent();
     }
 
+    /**
+     *
+     * @param index
+     * @param element
+     * @return
+     */
     @Override
     public boolean set(int index, E element) {
         if(index < 0 || index > this.currentSize){
@@ -140,6 +210,10 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         String string = "";
@@ -157,6 +231,10 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
         return string;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator iterator() {
         Iterator<E> i = new Iterator<E>(){
