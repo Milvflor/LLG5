@@ -9,5 +9,5 @@ package sopadeletras5;
  * @author milca
  */
 public class Sistema {
-    
+    ScreenController screenController;
 }
