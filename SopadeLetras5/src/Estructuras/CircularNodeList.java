@@ -53,7 +53,7 @@ public class CircularNodeList <E> {
     @Override
     public String toString() {
         
-        return "val: " + content.toString();
+        return content.toString();
     }
     
     

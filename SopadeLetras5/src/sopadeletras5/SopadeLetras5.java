@@ -26,13 +26,11 @@ public class SopadeLetras5 extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+                
+        Tablero tablero = new Tablero(5,4);
         
-        CircularMatrix lista = new CircularMatrix<>();
-        lista.zeros(3, 5, 'a');
-        
-        System.out.println(lista);
-        lista.put(0, 0, 'b');
-        System.out.println(lista);
+        tablero.getMatrix().put(1,2,'Z');
+        System.out.println(tablero.getMatrix());
         
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
@@ -45,9 +43,9 @@ public class SopadeLetras5 extends Application {
         });
         
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        root.getChildren().add(tablero.getGrid());
         
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, 900, 600);
         
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
