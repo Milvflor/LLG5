@@ -1,4 +1,5 @@
 /*
+
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -6,6 +7,9 @@ package sopadeletras5.Modalidad;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 
 /**
  *
@@ -25,6 +29,13 @@ public class Timer extends Thread {
     private Thread hilo;
     
     
+    
+    private Label lbl_Minutos;
+    private Label lbl_Segundos;
+    
+    private HBox TimerGUI;
+    
+    
     public Timer(int horas,int minutos,int segundos){
         this.hilo=new Thread();
         this.activo=true;
@@ -36,6 +47,13 @@ public class Timer extends Thread {
         this.HorasR=horas;
         this.MinutosR=minutos;
         this.SegundosR=segundos;
+        
+        
+        
+        TimerGUI=new HBox();
+        lbl_Minutos=new Label(""+Minutos);
+        lbl_Segundos=new Label(""+Segundos);
+        TimerGUI.getChildren().addAll(lbl_Minutos,lbl_Segundos);
     }
 
     @Override
@@ -62,12 +80,14 @@ public class Timer extends Thread {
                     parar();
                 }
                 System.out.println(""+Horas+":"+Minutos+":"+Segundos);
+                Platform.runLater(()->lbl_Minutos.setText(""+Minutos));
+                Platform.runLater(()->lbl_Segundos.setText(""+Segundos));
            }   
  
     }
     
     public void iniciar(){
-        this.hilo.start();
+        hilo.start();
     }
     
     public void parar(){
@@ -89,4 +109,37 @@ public class Timer extends Thread {
         this.MinutosR=minutos;
         this.SegundosR=segundos;
     }
+
+    public int getHoras() {
+        return Horas;
+    }
+
+    public int getMinutos() {
+        return Minutos;
+    }
+
+    public int getSegundos() {
+        return Segundos;
+    }
+    
+    public void actualizar(){
+        lbl_Minutos.setText(""+Minutos);
+        lbl_Segundos.setText(""+Segundos);
+    }
+
+    public Label getLbl_Minutos() {
+        return lbl_Minutos;
+    }
+
+    public Label getLbl_Segundos() {
+        return lbl_Segundos;
+    }
+
+    public HBox getTimerGUI() {
+        return TimerGUI;
+    }
+    
+    
+    
+    
 }
