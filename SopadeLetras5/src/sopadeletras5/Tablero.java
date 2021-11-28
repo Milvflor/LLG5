@@ -31,8 +31,15 @@ public class Tablero {
     public Tablero(int col, int row) {
         this.col = col;
         this.row = row;
-        matrix = new CircularMatrix<Character>();
-        matrix.zeros(col, row, 'D');
+        ArrayList<String> l = new ArrayList<>();
+        l.addLast("hola");
+        l.addLast("coso");
+        l.addLast("maleta");
+
+        
+        
+        matrix = new CircularMatrix<ArrayList>();
+        matrix.zeros(col, row, l);
         
         grid = this.drawBoard();
     }

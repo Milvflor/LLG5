@@ -15,13 +15,19 @@ import Estructuras.List;
  */
 public class CircularMatrix<E> {
 
-    private List<List<E>> matrix = new CircularLinkedList<>();
+    private List<List<E>> matrix = null;
     
     /**
      *
      */
     public CircularMatrix() {
         matrix = new CircularLinkedList<>();
+    }
+    
+    public void zerosInit(int row, int col){
+        
+        
+    
     }
 
     /**
@@ -30,6 +36,10 @@ public class CircularMatrix<E> {
      * @param row_size
      * @param default_value
      */
+    
+
+    
+    
     public void zeros(int col_size, int row_size, E default_value) {    
         List<E> new_lista;
         for(int i = 0; i < col_size; i++){
@@ -105,5 +115,5 @@ public class CircularMatrix<E> {
      */
     public void put(int col, int row, E data){
         this.matrix.get(col).set(row, data);
-    }
+    }    
 }

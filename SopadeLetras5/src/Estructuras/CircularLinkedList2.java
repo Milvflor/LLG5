@@ -11,16 +11,18 @@ import java.util.Iterator;
  * @author milca & kevin
  * @param <E>
  */
-public class CircularLinkedList<E> implements List<E>, Iterable {
+public class CircularLinkedList2<E> implements List<E> {
 
+    private CircularNodeList<E> start;
     private CircularNodeList<E> last;
-    private CircularNodeList<E> currentPointer;
     private int currentSize;
 
     /**
      *
      */
-    public CircularLinkedList() {
+    public CircularLinkedList2() {
+        start = null;
+        last = null;
         currentSize = 0;
     }
     
@@ -65,21 +67,21 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
      * @param e
      * @return
      */
-    @Override
-    public boolean addFirst(E e) {
-        
-        if(e == null){return false;}
-        
-        CircularNodeList<E> new_elem = new CircularNodeList<E>(e);
-        if(this.last != null){       
-            this.last.getNext().setPrevious(new_elem);
-            this.last.setNext(new_elem); 
-        } else {
-            this.setLast(new_elem);
-        }
-        this.currentSize++;
-        return true;
-    }
+//    @Override
+//    public boolean addFirst(E e) {
+//        
+//        if(e == null){return false;}
+//        
+//        CircularNodeList<E> new_elem = new CircularNodeList<E>(e);
+//        if(this.last != null){       
+//            this.last.getNext().setPrevious(new_elem);
+//            this.last.setNext(new_elem); 
+//        } else {
+//            this.setLast(new_elem);
+//        }
+//        this.currentSize++;
+//        return true;
+//    }
 
     /**
      *
@@ -88,24 +90,25 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
      */
     @Override
     public boolean addLast(E e) {
-        if (e == null) {
-            return false;
-        }
+        if (e == null) return false;
+        
         
         CircularNodeList<E> new_node = new CircularNodeList<E>(e);
-        
-        if(this.last != null){
-            
-            
-            new_node.setNext(last.getNext());
-            new_node.setPrevious(last);
-            last.getNext().setPrevious(new_node);
-            last.setNext(new_node);
 
+        if(this.start != null){
+            
+            new_node.setPrevious(last);
+            last.setNext(new_node);
+            new_node.setNext(start);
+            start.setPrevious(new_node);
+                       
             last = new_node;
+            
         } else {
-            this.setLast(new_node);
+            start = new_node;
+            last  = start;
         }
+        
         this.currentSize++;
         return true;
     }
@@ -218,10 +221,10 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
      *
      * @return
      */
-    @Override
+    
     public String toString() {
         String string = "";
-        CircularNodeList<E> current = last.getNext();
+        CircularNodeList<E> current = start;
         int i = 0;
 
         while (i < currentSize - 1) {
@@ -235,25 +238,53 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
         return string;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
-    public Iterator iterator() {
-        Iterator<E> i = new Iterator<E>(){
-            @Override
-            public boolean hasNext() {
-                return true;
-            }
-
-            @Override
-            public E next() {
-                currentPointer = currentPointer.getNext();
-                return currentPointer.getContent();
-            }
-        };
-        return i;
+    public boolean addFirst(E e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void desplazar(Integer n){
+        CircularNodeList<E> current = last;
+        
+        
+        for (int i = 1; i < n; i++) {
+            start = current.getPrevious();
+            current = start;
+        }
+    
+    }
+    
+   
+    /*
+    Llena la lista circular lenght veces de un solo dato.
+    */
+    
+    public void full(E data, Integer lenght){
+        
+        for (int i = 0; i < lenght; i++) {
+            this.addLast(data);
+        }
+    
+    }
+    
+  
+        
+    public static void main(String[] args) {
+        
+       
+        CircularLinkedList2<Integer> l = new CircularLinkedList2();
+        
+//        l.addLast("1");
+//        l.addLast("2");
+//        l.addLast("3");
+//        l.addLast("4");
+//        l.addLast("5");
+//        l.addLast("6");
+//        l.addLast("7");
+//        l.desplazar(3);
+
+        l.full(0, 5);
+        System.out.println(l.toString());
+}
 
 }

@@ -5,12 +5,14 @@
  */
 package Estructuras;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Kevin Zhang
  * @param <E>
  */
-public class ArrayList<E> implements List<E> {
+public class ArrayList<E> implements List<E>, Iterable{
     
     // arreglo de elementos
     private int capacity = 100;
@@ -167,5 +169,31 @@ public class ArrayList<E> implements List<E> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    
+    public void toString2(){
+        for (int i = 0; i < effectiveSize; i++) {
+            System.out.println(elements[i].toString());
+        }
+    
+    }
+
+    @Override
+    public Iterator iterator() {
+        Iterator<E> it = new Iterator<E>(){
+            int cursor = 0;
+            @Override
+            public boolean hasNext() {
+                return cursor<effectiveSize;
+            }
+
+            @Override
+            public E next() {
+                E e = elements[cursor];
+                cursor++;
+                return e;
+            }     
+        };
+        return it;
+    }
     
 }

@@ -33,8 +33,8 @@ public class CircularNodeList <E> {
      */
     public CircularNodeList(E content){
         this.content = content;
-        this.next = this;
-        this.previous = this;
+        this.next = null;
+        this.previous = null;
     }
 
     /**
