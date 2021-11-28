@@ -31,26 +31,24 @@ public class SopadeLetras5 extends Application {
     @Override
     public void start(Stage primaryStage) {
                 
-        Tablero tablero = new Tablero(5,4);
-        
-        tablero.getMatrix().put(1,2,'Z');
-        System.out.println(tablero.getMatrix());
         
         Label titulo=new Label("SOPA DE LETRAS");
-        
+        titulo.setStyle("-fx-font-size: 50px;-fx-");
+       
         
         
         Button btn = new Button();
         btn.setText("INICIAR");
         btn.setOnAction(e->{
             Sistema sistema=new Sistema();
-            Scene escena1=new Scene(sistema.getRoot(),500,500);
+            Scene escena1=new Scene(sistema.getRoot(),900,600);
             escena1.getStylesheets().add("/css/estiloInicio.css");
             primaryStage.setScene(escena1);
         });
         
         StackPane root = new StackPane();
 //        root.getChildren().add(tablero.getGrid());
+        root.setStyle("-fx-background-color: #FCC936; ");
         
 
         VBox columna=new VBox();
@@ -66,7 +64,7 @@ public class SopadeLetras5 extends Application {
      
 
         screenController = new ScreenController(900,600);
-
+                
         primaryStage.setTitle("SOPA DE LETRAS LGG5");
         primaryStage.setScene(scene);
 

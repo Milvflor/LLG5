@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import sopadeletras5.Base.Bloque;
 
 /**
  *
@@ -45,8 +46,8 @@ public class Tablero {
         for (int i = 0; i < col; i++) {
             for (int j = 0; j < row; j++) {
                 System.out.println(matrix.getMatrix().get(i));
-                Button cell = new Button(matrix.getMatrix().get(i).toString());
-                grid.add(cell, i, j,1,1);
+                Bloque cell = new Bloque(matrix.getMatrix().get(i).toString());
+                grid.add(cell.getPanel(), i, j,1,1);
             }
         }
         return grid;

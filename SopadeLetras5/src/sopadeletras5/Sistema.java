@@ -4,13 +4,18 @@
  */
 package sopadeletras5;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import sopadeletras5.Base.Bloque;
+import sopadeletras5.Modalidad.Timer;
 
 /**
  *
@@ -60,10 +65,30 @@ public class Sistema {
         txt_columna.setPrefWidth(50);
         
         btn_jugar=new Button("JUGAR");
+        btn_jugar.setId("btnJugar");
         
         btn_jugar.setOnAction(e->{
             System.out.println("------------------------------------------------------------------");
             System.out.println("filas: "+txt_fila.getText()+"\ncolumnas: "+txt_columna.getText());
+            
+            
+            
+            //GENERAR EL TABLERO
+             Tablero tablero = new Tablero(5,4);
+        
+             tablero.getMatrix().put(1,2,'Z');
+             System.out.println(tablero.getMatrix());
+             
+             BorderPane pantalla=new BorderPane();
+             tablero.getGrid().setId("tablero");
+             pantalla.setCenter(tablero.getGrid());
+             
+             Timer tiempo=new Timer(0,0,30);
+             tiempo.start();
+             
+             pantalla.setRight(tiempo.getTimerGUI());
+             
+             btn_jugar.getScene().setRoot(pantalla);       
         });
         
         fila1.getChildren().addAll(lbl_fila,txt_fila);

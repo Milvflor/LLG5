@@ -51,9 +51,11 @@ public class Timer extends Thread {
         
         
         TimerGUI=new HBox();
+        TimerGUI.setStyle("-fx-background-color:#FCC936;");
         lbl_Minutos=new Label(""+Minutos);
         lbl_Segundos=new Label(""+Segundos);
-        TimerGUI.getChildren().addAll(lbl_Minutos,lbl_Segundos);
+        Label separador=new Label(":");
+        TimerGUI.getChildren().addAll(lbl_Minutos,separador,lbl_Segundos);
     }
 
     @Override
@@ -79,7 +81,7 @@ public class Timer extends Thread {
                 if(Horas ==0 && Minutos==0 && Segundos==0){
                     parar();
                 }
-                System.out.println(""+Horas+":"+Minutos+":"+Segundos);
+//                System.out.println(""+Horas+":"+Minutos+":"+Segundos);
                 Platform.runLater(()->lbl_Minutos.setText(""+Minutos));
                 Platform.runLater(()->lbl_Segundos.setText(""+Segundos));
            }   

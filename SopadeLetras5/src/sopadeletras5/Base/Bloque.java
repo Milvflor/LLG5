@@ -5,6 +5,7 @@
  */
 package sopadeletras5.Base;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
@@ -28,17 +29,26 @@ public class Bloque {
     
     public void crearBloque(){
         panel=new StackPane();
+        panel.setPrefSize(50, 50);
+        panel.setAlignment(Pos.CENTER);
         
-        Rectangle cuadro=new Rectangle(50,50);
+        panel.setOnMouseEntered(e->{
+            pintar();
+        });
+        
+        
+        cuadro=new Rectangle(50,50);
         cuadro.setFill(Paint.valueOf("white"));
-        cuadro.setStroke(Paint.valueOf("black"));
-        cuadro.setStrokeWidth(2);
+//        cuadro.setStroke(Paint.valueOf("black"));
+//        cuadro.setStrokeWidth(2);
         
         letra=new Label();
         letra.setTextFill(Paint.valueOf("black"));
-        letra.setStyle("-fx-font-size: 30px;");
+        letra.setStyle("-fx-font-size: 11px;");
         
         panel.getChildren().addAll(cuadro,letra);
+        
+        
     }
 
     public StackPane getPanel() {
