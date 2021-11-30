@@ -6,7 +6,10 @@
 package Modelos;
 
 import Estructuras.ArrayList;
+import Estructuras.CircularLinkedList;
 import Estructuras.CircularLinkedList2;
+import Estructuras.Tupla;
+import java.util.Iterator;
 
 /**
  *
@@ -14,24 +17,37 @@ import Estructuras.CircularLinkedList2;
  */
 public class Palabra {
     
-    CircularMatrix2 box;
+    CircularMatrix2<Character> box;
     
     public Palabra(Integer f, Integer c){
         box = new CircularMatrix2(f,c);
     }
     
-   public void cargarData(ArrayList<String> data){
-
-    for (int i = 0; i < data.size(); i++) {
-        String tmp = data.get(i);
-        if (tmp.length() <= box.getColumnas()){
-            CircularLinkedList2<Character> array_ = insertWord(tmp, box.getColumnas());
-            System.out.println(array_.toString());
-            box.add(array_);
+   public void cargarPalabras(ArrayList<String> data){
+       CircularLinkedList2<Character> array_;
+       int insertadas = 0;
+       
+       for (int i = 0; i < data.size(); i++) {
+           String tmp = data.get(i);
+           if (tmp.length() <= box.getColumnas()){
+               array_ = insertWord(tmp, box.getColumnas());
+//               System.out.println(array_.toString());
+               box.add(array_);
+               insertadas++;
+            }   
         }
-    }
-    
-    
+       
+        array_ = new CircularLinkedList2<Character>();
+        array_.full('0', box.getColumnas());
+        while(insertadas <= box.getFilas()){
+            box.add(array_);
+//            System.out.println(array_.toString());
+            insertadas++;
+        }
+   }
+   
+   public void getTabla(){
+       System.out.println(box.toString());
    }
     
     
@@ -57,25 +73,68 @@ public class Palabra {
         return l;
     }
     
-    @Override
-    public String toString(){
-        
-        return box.toString();
+    public void shuffleF(){
+        box.desordenar();
     }
     
+    public ArrayList<Tupla<Integer, Integer>> getNullsIndex(){
+        
+        CircularLinkedList2<Character> tmp;
+        
+        ArrayList<Tupla<Integer, Integer>> r = new ArrayList<>();
+        
+        for (int f = 0; f < this.box.getFilas(); f++) {
+            int col = 0;
+            tmp = this.box.getMatrix().get(f);
+            Iterator<Character> it = tmp.iterator();
+            while(it.hasNext()){
+                Character c = it.next();
+                
+                if (c.equals('0')){
+                    r.addLast(new Tupla(f, col));
+                }
+                col++;
+            }
+        }
+        return r;
+    }
+    
+    
+     
+    
+    
+     
+    
     public static void main(String[] args) {
-        Palabra b = new Palabra(6,7);
+        Palabra b = new Palabra(9,7);
         
         ArrayList<String> palabras = new ArrayList();
         palabras.addLast("Hola");       
         palabras.addLast("maleta");
         palabras.addLast("murcielago");
         palabras.addLast("barco");
-        palabras.addLast("la");
+        palabras.addLast("mouse");
+        palabras.addLast("monitor");
+        palabras.addLast("teclado");
+        palabras.addLast("amigos");
+
         
-        b.cargarData(palabras);
         
-//        System.out.println(b.toString());
+        b.cargarPalabras(palabras);
+        b.getTabla();
+        System.out.println("==================================");
+        b.shuffleF();
+        b.getTabla();
+        System.out.println(b.getNullsIndex());;
+        
+//        ArrayList<Tupla<Integer, Integer>> indices = new ArrayList<>();
+//        
+//        indices.addLast(new Tupla(1,4));       
+//        indices.addLast(new Tupla(1,5));
+//        indices.addLast(new Tupla(1,6));
+//        indices.addLast(new Tupla(2,6));
+//
+//        System.out.println(indices.toString());
 
      }
 }

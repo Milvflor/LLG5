@@ -11,7 +11,7 @@ import java.util.Iterator;
  * @author milca & kevin
  * @param <E>
  */
-public class CircularLinkedList2<E> implements List<E> {
+public class CircularLinkedList2<E> implements List<E>, Iterable {
 
     private CircularNodeList<E> start;
     private CircularNodeList<E> last;
@@ -286,5 +286,27 @@ public class CircularLinkedList2<E> implements List<E> {
         l.full(0, 5);
         System.out.println(l.toString());
 }
+
+    @Override
+    public Iterator iterator() {
+        Iterator<E> it = new Iterator<E>(){
+            CircularNodeList<E> n = start;
+            int cursor = 0;
+            @Override
+            public boolean hasNext() {
+                return cursor < currentSize;
+            }
+
+            @Override
+            public E next() {
+                E r = n.getContent();
+                n = n.getNext();
+                cursor++;
+                return r;
+            }
+        };
+        return it;
+    }
+    
 
 }

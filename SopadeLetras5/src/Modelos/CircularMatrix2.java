@@ -46,6 +46,14 @@ public class CircularMatrix2<E> {
         countf++;
         return true;
     }
+    
+    public void desordenar(){
+        Integer nveces = (int)(Math.random() * this.getFilas());
+        for (int i = 0; i < nveces; i++) {
+            Integer posicion = (int)(Math.random() * this.getFilas());
+            this.matrix.intercambiar(posicion);
+        } 
+    }
 
     public Integer getColumnas() {
         return columnas;

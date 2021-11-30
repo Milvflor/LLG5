@@ -123,6 +123,15 @@ public class ArrayList<E> implements List<E>, Iterable{
     public void clear() {
         this.effectiveSize = 0;
     }
+    
+    public void intercambiar(Integer i){
+        Integer randomNum = (int)(Math.random() * effectiveSize);
+        E d1 = elements[i];
+        E d2 = elements[randomNum];
+        
+        elements[randomNum] = d1;
+        elements[i] = d2;
+    }
 
     /**
      *
@@ -131,7 +140,7 @@ public class ArrayList<E> implements List<E>, Iterable{
      */
     @Override
     public void add(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     /**
@@ -170,11 +179,15 @@ public class ArrayList<E> implements List<E>, Iterable{
     }
     
     
-    public void toString2(){
+    @Override
+    public String toString(){
+        String s = "[";
         for (int i = 0; i < effectiveSize; i++) {
-            System.out.println(elements[i].toString());
+            s += elements[i].toString();
+            if (i < effectiveSize -1) s+=',';
         }
-    
+        s += "]";
+        return s;
     }
 
     @Override
