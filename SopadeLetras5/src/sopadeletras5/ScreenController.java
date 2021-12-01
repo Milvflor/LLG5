@@ -12,6 +12,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -188,21 +190,26 @@ public class ScreenController {
         VBox root=new VBox();
         root.setAlignment(Pos.CENTER);
         HBox fila1=new HBox();
+        VBox espacio=new VBox();
+        espacio.setPrefHeight(100);
         HBox fila2=new HBox();
         fila1.setAlignment(Pos.CENTER);
+        fila1.setPadding(new Insets(20,20,20,20));
         fila2.setAlignment(Pos.CENTER);
+        fila1.setSpacing(20);
+        fila2.setSpacing(20);
         
         
         
         Label lbl_fila=new Label("filas");
-        Label lbl_columna=new Label("columna");
+        Label lbl_columna=new Label("columnas");
         
         txt_fila=new TextField();
         txt_columna=new TextField();
         
         
         
-        Button btn_jugar=new Button("JUGAR");
+        Button btn_jugar=generateButton("JUGAR");
         
         btn_jugar.setId("btnJugar");
         
@@ -210,14 +217,20 @@ public class ScreenController {
             System.out.println("------------------------------------------------------------------");
             System.out.println("filas: "+txt_fila.getText()+"\ncolumnas: "+txt_columna.getText());
             System.out.println("------------------------------------------------------------------");
+            try{
             changeScene(2);
+            }catch(Exception m){
+                Alert alerta=new Alert(AlertType.ERROR);
+                alerta.show();
+            }
         });
         
         
         fila1.getChildren().addAll(lbl_fila,txt_fila);
         fila2.getChildren().addAll(lbl_columna,txt_columna);
         
-        root.getChildren().addAll(fila1,fila2,btn_jugar);
+        root.setStyle("-fx-font-weight:bold;-fx-font-size:20px;");
+        root.getChildren().addAll(fila1,fila2,espacio,btn_jugar);
                 
         return root;
     }
@@ -225,37 +238,42 @@ public class ScreenController {
     
     
     private Pane generatePlayground(){
-//            int filas=Integer.parseInt(txt_fila.getText());
-//            int columnas=Integer.parseInt(txt_columna.getText());
-            
-            
-             Tablero tablero = new Tablero(7,7);
- 
-             BorderPane pantalla=new BorderPane();
+        BorderPane pantalla=new BorderPane();
+        
+//        
+//        int filas=Integer.parseInt(txt_fila.getText());
+//        int columnas=Integer.parseInt(txt_columna.getText());
+//        
+        
+         Tablero tablero = new Tablero(7,7);
 
-             VBox lado_derecho=new VBox();
-             lado_derecho.setAlignment(Pos.CENTER);
-             lado_derecho.setPrefWidth(200);
+         
+         pantalla.setStyle("-fx-font-size:20px;");
 
-             tablero.getGrid().setId("tablero");
-             tablero.getGrid().setPrefSize(70, 70);
-             pantalla.setCenter(tablero.getGrid());
-             
-             //Temporizador
-             Timer tiempo=new Timer(0,5,30);
-             tiempo.start();
-             
+         VBox lado_derecho=new VBox();
+         lado_derecho.setAlignment(Pos.CENTER);
+         lado_derecho.setPrefWidth(200);
 
-             
-             //Jugador
-             Jugador player1=new Jugador("Hugo");
-             pantalla.setLeft(player1.getScore().getScoreGUI());
-             
-             
-             lado_derecho.getChildren().addAll(player1.getScore().getScoreGUI(),tiempo.getTimerGUI());
-             pantalla.setRight(lado_derecho);
+         tablero.getGrid().setId("tablero");
+         tablero.getGrid().setPrefSize(70, 70);
+         pantalla.setCenter(tablero.getGrid());
+
+         //Temporizador
+         Timer tiempo=new Timer(0,5,30);
+         tiempo.start();
+
+
+
+         //Jugador
+         Jugador player1=new Jugador("Hugo");
+         pantalla.setLeft(player1.getScore().getScoreGUI());
+
+
+         lado_derecho.getChildren().addAll(player1.getScore().getScoreGUI(),tiempo.getTimerGUI());
+         pantalla.setRight(lado_derecho);
 
         return pantalla;
+     
     }
     
 }
