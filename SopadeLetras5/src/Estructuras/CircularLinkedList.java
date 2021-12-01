@@ -272,7 +272,7 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
 
     }
 
-    public void full(E data, Integer lenght) {
+    public void full(E data, int lenght) {
 
         for (int i = 0; i < lenght; i++) {
             this.addLast(data);
