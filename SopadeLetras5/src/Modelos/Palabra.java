@@ -7,7 +7,7 @@ package Modelos;
 
 import Estructuras.ArrayList;
 import Estructuras.CircularLinkedList;
-import Estructuras.CircularLinkedList2;
+import Estructuras.List;
 import Estructuras.Tupla;
 import java.util.Iterator;
 
@@ -17,29 +17,29 @@ import java.util.Iterator;
  */
 public class Palabra {
     
-    CircularMatrix2<Character> box;
+    CircularMatrix<Character> box;
     
     public Palabra(Integer f, Integer c){
-        box = new CircularMatrix2(f,c);
+        box = new CircularMatrix(f,c);
     }
     
    public void cargarPalabras(ArrayList<String> data){
-       CircularLinkedList2<Character> array_;
+       CircularLinkedList<Character> array_;
        int insertadas = 0;
        
        for (int i = 0; i < data.size(); i++) {
            String tmp = data.get(i);
-           if (tmp.length() <= box.getColumnas()){
-               array_ = insertWord(tmp, box.getColumnas());
+           if (tmp.length() <= box.getCols()){
+               array_ = insertWord(tmp, box.getCols());
 //               System.out.println(array_.toString());
                box.add(array_);
                insertadas++;
             }   
         }
        
-        array_ = new CircularLinkedList2<Character>();
-        array_.full('0', box.getColumnas());
-        while(insertadas <= box.getFilas()){
+        array_ = new CircularLinkedList<Character>();
+        array_.full('0', box.getCols());
+        while(insertadas <= box.getRows()){
             box.add(array_);
 //            System.out.println(array_.toString());
             insertadas++;
@@ -51,9 +51,9 @@ public class Palabra {
    }
     
     
-    public static CircularLinkedList2<Character> insertWord(String w, Integer lenght_max){
+    public static CircularLinkedList<Character> insertWord(String w, Integer lenght_max){
         
-        CircularLinkedList2<Character> l = new CircularLinkedList2<Character>();
+        CircularLinkedList<Character> l = new CircularLinkedList<Character>();
         if (w.length() > lenght_max) return l;
         
         
@@ -69,21 +69,21 @@ public class Palabra {
         
         Integer randomNum = (int)(Math.random() * des_permitido);
         
-        l.desplazar(randomNum);
+        l.move(randomNum);
         return l;
     }
     
     public void shuffleF(){
-        box.desordenar();
+        box.scramble();
     }
     
-    public ArrayList<Tupla<Integer, Integer>> getNullsIndex(){
+    public List<Tupla<Integer, Integer>> getNullsIndex(){
         
-        CircularLinkedList2<Character> tmp;
+        List<Character> tmp;
         
-        ArrayList<Tupla<Integer, Integer>> r = new ArrayList<>();
+        List<Tupla<Integer, Integer>> r = new ArrayList<>();
         
-        for (int f = 0; f < this.box.getFilas(); f++) {
+        for (int f = 0; f < this.box.getRows(); f++) {
             int col = 0;
             tmp = this.box.getMatrix().get(f);
             Iterator<Character> it = tmp.iterator();
@@ -98,12 +98,6 @@ public class Palabra {
         }
         return r;
     }
-    
-    
-     
-    
-    
-     
     
     public static void main(String[] args) {
         Palabra b = new Palabra(9,7);

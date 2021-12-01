@@ -5,7 +5,7 @@ package Estructuras;
  * @author Kevin Zhang
  * @param <E>
  */
-public interface List<E> {
+public interface List<E> extends Iterable{
     
     /**
      *
@@ -79,4 +79,8 @@ public interface List<E> {
      */
     public boolean set(int index, E element); // setea el element en la posición index
 
+    
+    public void replace(Integer i);
+    
+    public void move(Integer n);
 }
