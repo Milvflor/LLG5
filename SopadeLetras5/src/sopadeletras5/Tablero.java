@@ -18,7 +18,7 @@ import javafx.scene.layout.StackPane;
  */
 public class Tablero {
 
-    private CircularMatrix matrix;
+    private CircularMatrix<Character> matrix;
     private int col, row;
     
     GridPane grid;   
@@ -32,7 +32,7 @@ public class Tablero {
         this.col = col;
         this.row = row;       
         
-        matrix = new CircularMatrix<ArrayList>(col, row);
+        matrix = new CircularMatrix<Character>(col, row);
         matrix.zerosInit('e');
         
         grid = this.drawBoard();
@@ -45,7 +45,7 @@ public class Tablero {
         grid.setVgap(2);
         for (int i = 0; i < col - 1; i++) {
             for (int j = 0; j < row - 1; j++) {
-                Button cell = new Button(matrix.getMatrix().get(i).toString());
+                Button cell = new Button(matrix.getMatrix().get(i).get(j).toString());
                 grid.add(cell, i, j,1,1);
             }
         }
