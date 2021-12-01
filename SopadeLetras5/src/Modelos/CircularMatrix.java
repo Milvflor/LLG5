@@ -5,6 +5,7 @@
  */
 package Modelos;
 
+import Estructuras.ArrayList;
 import Estructuras.CircularLinkedList;
 import Estructuras.List;
 
@@ -16,43 +17,49 @@ import Estructuras.List;
 public class CircularMatrix<E> {
 
     private List<List<E>> matrix = null;
-    
+    private int cols, rows;
+    private int countf;
+
     /**
      *
      */
     public CircularMatrix() {
         matrix = new CircularLinkedList<>();
     }
-    
-    public void zerosInit(int row, int col){
-        
-        
-    
+
+    public CircularMatrix(int cols, int rows) {
+        matrix = new ArrayList<>();
+        this.cols = cols;
+        this.rows = rows;
     }
 
-    /**
-     *
-     * @param col_size
-     * @param row_size
-     * @param default_value
-     */
-    
+    public void zerosInit(E data) {
+        for (int i = 0; i < this.rows; i++) {
 
-    
-    
-    public void zeros(int col_size, int row_size, E default_value) {    
-        List<E> new_lista;
-        for(int i = 0; i < col_size; i++){
-            new_lista = new CircularLinkedList<>();
-            
-            for(int j = 0; j < row_size; j++ ){
-                new_lista.addLast(default_value);
-            }
-            
-            matrix.addLast(new_lista);
-        }        
+            CircularLinkedList<E> l = new CircularLinkedList<E>();
+            l.full(data, this.cols);
+            matrix.addLast(l);
+        }
+
     }
-    
+
+    public boolean add(CircularLinkedList<E> data) {
+        if (data.size() > this.cols || countf > this.rows) {
+            return false;
+        }
+        matrix.addLast(data);
+        countf++;
+        return true;
+    }
+
+    public void scramble() {
+        int nveces = (int) (Math.random() * this.cols);
+        for (int i = 0; i < nveces; i++) {
+            int posicion = (int) (Math.random() * this.rows);
+            this.matrix.replace(posicion);
+        }
+    }
+
     /**
      *
      * @return
@@ -75,7 +82,7 @@ public class CircularMatrix<E> {
         }
         string += "\n";
         List<E> current_pointer = matrix.get(0);
-        
+
         for (int i = 0; i < current_pointer.size(); i++) {
             string += "----+";
             for (int j = 0; j < matrix.size(); j++) {
@@ -100,20 +107,44 @@ public class CircularMatrix<E> {
                 }
                 string += "|";
             }
-            
-            
+
             string += "\n";
         }
         return string;
     }
-    
+
+    public int getCols() {
+        return cols;
+    }
+
+    public void setCols(int cols) {
+        this.cols = cols;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    public int getCountf() {
+        return countf;
+    }
+
+    public void setCountf(int countf) {
+        this.countf = countf;
+    }
+
     /**
      * Este metodo permite añadir un valor en una posicion (i,j)
+     *
      * @param col indice de la columna
-     * @param row indice de la fila 
+     * @param row indice de la fila
      * @param data dato a insertar
      */
-    public void put(int col, int row, E data){
+    public void put(int col, int row, E data) {
         this.matrix.get(col).set(row, data);
-    }    
+    }
 }

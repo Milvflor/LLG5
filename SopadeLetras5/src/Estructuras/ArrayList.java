@@ -26,6 +26,7 @@ public class ArrayList<E> implements List<E>, Iterable{
         this.elements = (E[]) (new Object[capacity]);
         this.effectiveSize = 0;
     }
+
     
     private boolean isFull(){
         return this.effectiveSize == this.capacity;
@@ -124,7 +125,7 @@ public class ArrayList<E> implements List<E>, Iterable{
         this.effectiveSize = 0;
     }
     
-    public void intercambiar(Integer i){
+    public void replace(Integer i){
         Integer randomNum = (int)(Math.random() * effectiveSize);
         E d1 = elements[i];
         E d2 = elements[randomNum];
@@ -207,6 +208,11 @@ public class ArrayList<E> implements List<E>, Iterable{
             }     
         };
         return it;
+    }
+
+    @Override
+    public void move(Integer n) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

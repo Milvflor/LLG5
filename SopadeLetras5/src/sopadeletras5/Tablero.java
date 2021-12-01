@@ -39,7 +39,7 @@ public class Tablero {
         
         
         matrix = new CircularMatrix<ArrayList>();
-        matrix.zeros(col, row, l);
+        matrix.zerosInit('e');
         
         grid = this.drawBoard();
     }
