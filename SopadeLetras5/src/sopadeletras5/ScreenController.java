@@ -9,11 +9,15 @@ import Estructuras.ArrayList;
 import Estructuras.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
@@ -26,7 +30,14 @@ public class ScreenController {
     
     private List<Pane> panes;
     private int height, width;
+    
+    private static Font TITLEFONT = Font.font("Courier New", FontWeight.BOLD, 40);
+    private static Font BUTTONFONT = Font.font("Courier New", FontWeight.BOLD, 20);
 
+    private static String TITLELABELFILL = "0000ff";
+    private static String BUTTONLABELFILL = "0000ff";
+    private static String BUTTONBORDER = "";
+    
     /**
      *
      * @param height
@@ -95,24 +106,57 @@ public class ScreenController {
     public void setCurrentPane(Pane currentPane) {
         this.currentPane = currentPane;
     }
+    
+    private static Button generateButton(String label){
+        Button cache = new Button(label);
+        cache.setMinSize(300, 80);
+        cache.setFont(BUTTONFONT);
+        cache.setStyle("-fx-border-color: #"+ BUTTONBORDER + ";-fx-text-fill: #"+BUTTONLABELFILL);
+
+        return cache;
+    }
+    
+    private static Label generateH1(String label){
+        Label cache = new Label(label);
+        
+        cache.setFont(TITLEFONT);
+        cache.setStyle("-fx-text-fill: #"+TITLELABELFILL);
+        return cache;
+    }
         
     private Pane generateMainMenu(){
         VBox main = new VBox();
         
-        Label title = new Label("Menu principal");
+        main.setAlignment(Pos.TOP_CENTER);
+        main.setSpacing(40);
+        main.setPadding(new Insets(100,0,0,0));
+        
+        Label title = generateH1("Sopa de Letras");
         
         main.getChildren().add(title);
         
-        Button button = new Button("Cambiar");
+        VBox buttonContainer = new VBox();
         
-        button.setOnAction(new EventHandler<ActionEvent>() {
+        buttonContainer.setAlignment(Pos.TOP_CENTER);
+        buttonContainer.setSpacing(15);
+        
+        Button start = generateButton("Iniciar Juego");
+        Button leaderboard = generateButton("LeaderBoard");
+        Button end = generateButton("Salir");
+        
+        start.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 changeScene(1);
             }
         });
         
-        main.getChildren().add(button);
+        buttonContainer.getChildren().add(start);
+        buttonContainer.getChildren().add(leaderboard);
+        buttonContainer.getChildren().add(end);
+        
+        main.getChildren().add(buttonContainer);
+        
         return main;
     }
 
