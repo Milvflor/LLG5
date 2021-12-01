@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import sopadeletras5.Base.Bloque;
 
 /**
  *
@@ -40,13 +41,14 @@ public class Tablero {
 
     private GridPane drawBoard() {
         GridPane grid = new GridPane();
+        grid.setGridLinesVisible(true);
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(2);
         grid.setVgap(2);
         for (int i = 0; i < col - 1; i++) {
             for (int j = 0; j < row - 1; j++) {
-                Button cell = new Button(matrix.getMatrix().get(i).get(j).toString());
-                grid.add(cell, i, j,1,1);
+                Bloque cell = new Bloque(matrix.getMatrix().get(i).get(j).toString());
+                grid.add(cell.getPanel(), i, j,1,1);
             }
         }
         return grid;
