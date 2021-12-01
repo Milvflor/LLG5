@@ -34,9 +34,9 @@ public class CircularMatrix<E> {
     }
 
     public void zerosInit(E data) {
-        for (int i = 0; i < this.rows; i++) {
+        for (int i = 0; i < this.cols; i++) {
             CircularLinkedList<E> l = new CircularLinkedList<E>();
-            l.full(data, this.cols);
+            l.full(data, this.rows);
             matrix.addLast(l);
         }
         
@@ -45,7 +45,7 @@ public class CircularMatrix<E> {
     }
 
     public boolean add(CircularLinkedList<E> data) {
-        if (data.size() > this.cols || countf > this.rows) {
+        if (data.size() > this.rows || countf > this.cols) {
             return false;
         }
         matrix.addLast(data);
