@@ -30,15 +30,9 @@ public class Tablero {
      */
     public Tablero(int col, int row) {
         this.col = col;
-        this.row = row;
-        ArrayList<String> l = new ArrayList<>();
-        l.addLast("hola");
-        l.addLast("coso");
-        l.addLast("maleta");
-
+        this.row = row;       
         
-        
-        matrix = new CircularMatrix<ArrayList>();
+        matrix = new CircularMatrix<ArrayList>(col, row);
         matrix.zerosInit('e');
         
         grid = this.drawBoard();
@@ -49,9 +43,8 @@ public class Tablero {
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(2);
         grid.setVgap(2);
-        for (int i = 0; i < col; i++) {
-            for (int j = 0; j < row; j++) {
-                System.out.println(matrix.getMatrix().get(i));
+        for (int i = 0; i < col - 1; i++) {
+            for (int j = 0; j < row - 1; j++) {
                 Button cell = new Button(matrix.getMatrix().get(i).toString());
                 grid.add(cell, i, j,1,1);
             }

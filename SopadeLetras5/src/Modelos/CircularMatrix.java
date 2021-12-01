@@ -35,11 +35,12 @@ public class CircularMatrix<E> {
 
     public void zerosInit(E data) {
         for (int i = 0; i < this.rows; i++) {
-
             CircularLinkedList<E> l = new CircularLinkedList<E>();
             l.full(data, this.cols);
             matrix.addLast(l);
         }
+        
+        System.out.println( "cols: " + this.cols + " rows: " +this.rows);
 
     }
 
