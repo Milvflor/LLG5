@@ -4,10 +4,65 @@
  */
 package sopadeletras5.Modalidad;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+
 /**
  *
  * @author milca
  */
 public class Score {
+    private int puntaje;
+    private StackPane scoreGUI;
     
+    private Rectangle fondo;
+    private Label lbl_titulo;
+    private Label lbl_puntos;
+    private HBox fila;
+    
+    
+    public Score(){
+        this.puntaje=0;
+        generarGUI();
+    }
+    
+    
+    public void generarGUI(){
+       scoreGUI=new StackPane();
+       fondo=new Rectangle();
+       fila=new HBox();
+       lbl_titulo=new Label("Puntos ");
+       lbl_titulo.setStyle("-fx-text-fill:blue;");
+       lbl_puntos=new Label(""+this.puntaje);
+       lbl_puntos.setStyle("-fx-text-fill:green;");
+       fila.getChildren().addAll(lbl_titulo,lbl_puntos);
+       scoreGUI.getChildren().addAll(fondo,fila);
+    }
+    
+    public boolean addPoints(String palabra){
+        
+        if(palabra!=null){
+            this.puntaje=this.puntaje+palabra.length();
+            this.lbl_puntos.setText(""+this.puntaje);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean losePoints(String palabra){
+        if(palabra!=null){
+            this.puntaje=this.puntaje-palabra.length();
+            this.lbl_puntos.setText(""+this.puntaje);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public StackPane getScoreGUI(){
+        return scoreGUI;
+    }
 }
