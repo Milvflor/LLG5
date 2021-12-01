@@ -14,11 +14,16 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import sopadeletras5.Base.Jugador;
+import sopadeletras5.Modalidad.Timer;
 
 /**
  *
@@ -38,6 +43,11 @@ public class ScreenController {
     private static String BUTTONLABELFILL = "0000ff";
     private static String BUTTONBORDER = "";
     
+    
+    
+    private TextField txt_fila;
+    private TextField txt_columna;
+    
     /**
      *
      * @param height
@@ -47,7 +57,9 @@ public class ScreenController {
         panes = new ArrayList<>();
         
         panes.addLast(this.generateMainMenu());
+        panes.addLast(this.generateLobby());
         panes.addLast(this.generatePlayground());
+        
         this.setCurrentPane(panes.get(0));
         this.context = new Scene(currentPane, height, width);
     }
@@ -171,14 +183,79 @@ public class ScreenController {
         return this.panes.size() - 1;
     }
     
+    
+    private Pane generateLobby(){
+        VBox root=new VBox();
+        root.setAlignment(Pos.CENTER);
+        HBox fila1=new HBox();
+        HBox fila2=new HBox();
+        fila1.setAlignment(Pos.CENTER);
+        fila2.setAlignment(Pos.CENTER);
+        
+        
+        
+        Label lbl_fila=new Label("filas");
+        Label lbl_columna=new Label("columna");
+        
+        txt_fila=new TextField();
+        txt_columna=new TextField();
+        
+        
+        
+        Button btn_jugar=new Button("JUGAR");
+        
+        btn_jugar.setId("btnJugar");
+        
+        btn_jugar.setOnAction(e->{
+            System.out.println("------------------------------------------------------------------");
+            System.out.println("filas: "+txt_fila.getText()+"\ncolumnas: "+txt_columna.getText());
+            System.out.println("------------------------------------------------------------------");
+            changeScene(2);
+        });
+        
+        
+        fila1.getChildren().addAll(lbl_fila,txt_fila);
+        fila2.getChildren().addAll(lbl_columna,txt_columna);
+        
+        root.getChildren().addAll(fila1,fila2,btn_jugar);
+                
+        return root;
+    }
+    
+    
+    
     private Pane generatePlayground(){
-        VBox main = new VBox();
-        
-        Label title = new Label("Playground");
-        
-        main.getChildren().add(title);
-        
-        return main;
+//            int filas=Integer.parseInt(txt_fila.getText());
+//            int columnas=Integer.parseInt(txt_columna.getText());
+            
+            
+             Tablero tablero = new Tablero(7,7);
+ 
+             BorderPane pantalla=new BorderPane();
+
+             VBox lado_derecho=new VBox();
+             lado_derecho.setAlignment(Pos.CENTER);
+             lado_derecho.setPrefWidth(200);
+
+             tablero.getGrid().setId("tablero");
+             tablero.getGrid().setPrefSize(70, 70);
+             pantalla.setCenter(tablero.getGrid());
+             
+             //Temporizador
+             Timer tiempo=new Timer(0,5,30);
+             tiempo.start();
+             
+
+             
+             //Jugador
+             Jugador player1=new Jugador("Hugo");
+             pantalla.setLeft(player1.getScore().getScoreGUI());
+             
+             
+             lado_derecho.getChildren().addAll(player1.getScore().getScoreGUI(),tiempo.getTimerGUI());
+             pantalla.setRight(lado_derecho);
+
+        return pantalla;
     }
     
 }

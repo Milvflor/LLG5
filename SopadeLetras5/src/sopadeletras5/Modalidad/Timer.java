@@ -25,13 +25,17 @@ public class Timer extends Thread {
     private int SegundosR;
     
     
+    
     private boolean activo;
     private Thread hilo;
     
     
-    
+    private Label lbl_titulo;
     private Label lbl_Minutos;
+    private Label lbl_separador;
     private Label lbl_Segundos;
+    
+    
     
     private HBox TimerGUI;
     
@@ -49,11 +53,8 @@ public class Timer extends Thread {
         this.SegundosR=segundos;
         
         
+        generarGUI();
         
-        TimerGUI=new HBox();
-        lbl_Minutos=new Label(""+Minutos);
-        lbl_Segundos=new Label(""+Segundos);
-        TimerGUI.getChildren().addAll(lbl_Minutos,lbl_Segundos);
     }
 
     @Override
@@ -79,7 +80,7 @@ public class Timer extends Thread {
                 if(Horas ==0 && Minutos==0 && Segundos==0){
                     parar();
                 }
-                System.out.println(""+Horas+":"+Minutos+":"+Segundos);
+//                System.out.println(""+Horas+":"+Minutos+":"+Segundos);
                 Platform.runLater(()->lbl_Minutos.setText(""+Minutos));
                 Platform.runLater(()->lbl_Segundos.setText(""+Segundos));
            }   
@@ -139,7 +140,15 @@ public class Timer extends Thread {
         return TimerGUI;
     }
     
-    
+    public void generarGUI(){
+        TimerGUI=new HBox();
+        TimerGUI.setStyle("-fx-background-color:#FCC936;");
+        lbl_titulo=new Label("Tiempo ");
+        lbl_Minutos=new Label(""+Minutos);
+        lbl_separador=new Label(":");
+        lbl_Segundos=new Label(""+Segundos);
+        TimerGUI.getChildren().addAll(lbl_titulo,lbl_Minutos,lbl_separador,lbl_Segundos);
+    }
     
     
 }
