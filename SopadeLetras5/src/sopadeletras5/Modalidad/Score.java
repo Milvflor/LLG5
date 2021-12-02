@@ -4,6 +4,7 @@
  */
 package sopadeletras5.Modalidad;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -31,14 +32,15 @@ public class Score {
     
     public void generarGUI(){
        scoreGUI=new StackPane();
-       fondo=new Rectangle();
+       scoreGUI.setStyle("-fx-background-color:white;-fx-font-weight:bold;");
        fila=new HBox();
+       fila.setAlignment(Pos.CENTER);
        lbl_titulo=new Label("Puntos ");
        lbl_titulo.setStyle("-fx-text-fill:blue;");
        lbl_puntos=new Label(""+this.puntaje);
        lbl_puntos.setStyle("-fx-text-fill:green;");
        fila.getChildren().addAll(lbl_titulo,lbl_puntos);
-       scoreGUI.getChildren().addAll(fondo,fila);
+       scoreGUI.getChildren().addAll(fila);
     }
     
     public boolean addPoints(String palabra){

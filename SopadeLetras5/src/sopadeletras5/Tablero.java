@@ -45,8 +45,8 @@ public class Tablero {
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(2);
         grid.setVgap(2);
-        for (int i = 0; i < col - 1; i++) {
-            for (int j = 0; j < row - 1; j++) {
+        for (int i = 0; i < col ; i++) {
+            for (int j = 0; j < row ; j++) {
                 Bloque cell = new Bloque(matrix.getMatrix().get(i).get(j).toString());
                 grid.add(cell.getPanel(), i, j,1,1);
             }

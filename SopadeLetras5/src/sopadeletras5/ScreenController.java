@@ -17,6 +17,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -60,7 +63,7 @@ public class ScreenController {
         
         panes.addLast(this.generateMainMenu());
         panes.addLast(this.generateLobby());
-        panes.addLast(this.generatePlayground());
+        panes.addLast(this.generarLeaderBoard());
         
         this.setCurrentPane(panes.get(0));
         this.context = new Scene(currentPane, height, width);
@@ -165,6 +168,15 @@ public class ScreenController {
             }
         });
         
+        leaderboard.setOnAction(m->{
+            changeScene(2);
+        });
+        
+        end.setOnAction(a->{
+            System.exit(0);
+        });
+        
+        
         buttonContainer.getChildren().add(start);
         buttonContainer.getChildren().add(leaderboard);
         buttonContainer.getChildren().add(end);
@@ -200,16 +212,19 @@ public class ScreenController {
         fila2.setSpacing(20);
         
         
+        Label titulo=generateH1("Dimensiones del tablero");;
         
-        Label lbl_fila=new Label("filas");
-        Label lbl_columna=new Label("columnas");
+        Label lbl_fila=new Label("Filas");
+        Label lbl_columna=new Label("Columnas");
         
         txt_fila=new TextField();
+        txt_fila.setPrefWidth(50);
+        
         txt_columna=new TextField();
+        txt_columna.setPrefWidth(50);
         
         
-        
-        Button btn_jugar=generateButton("JUGAR");
+        Button btn_jugar=generateButton("Jugar");
         
         btn_jugar.setId("btnJugar");
         
@@ -218,7 +233,10 @@ public class ScreenController {
             System.out.println("filas: "+txt_fila.getText()+"\ncolumnas: "+txt_columna.getText());
             System.out.println("------------------------------------------------------------------");
             try{
-            changeScene(2);
+                
+            panes.addLast(this.generatePlayground());    
+                
+            changeScene(3);
             }catch(Exception m){
                 Alert alerta=new Alert(AlertType.ERROR);
                 alerta.show();
@@ -230,7 +248,7 @@ public class ScreenController {
         fila2.getChildren().addAll(lbl_columna,txt_columna);
         
         root.setStyle("-fx-font-weight:bold;-fx-font-size:20px;");
-        root.getChildren().addAll(fila1,fila2,espacio,btn_jugar);
+        root.getChildren().addAll(titulo,fila1,fila2,espacio,btn_jugar);
                 
         return root;
     }
@@ -239,13 +257,19 @@ public class ScreenController {
     
     private Pane generatePlayground(){
         BorderPane pantalla=new BorderPane();
+ 
+        ImageView imagen=new ImageView("/recursos/fondo.jpeg");
+        imagen.setEffect(new GaussianBlur(5));
+        imagen.fitWidthProperty().bind(context.widthProperty());
+        imagen.fitHeightProperty().bind(context.heightProperty());
         
-//        
-//        int filas=Integer.parseInt(txt_fila.getText());
-//        int columnas=Integer.parseInt(txt_columna.getText());
-//        
+        pantalla.getChildren().add(imagen);
         
-         Tablero tablero = new Tablero(7,7);
+        int filas=Integer.parseInt(txt_fila.getText());
+        int columnas=Integer.parseInt(txt_columna.getText());
+        
+        
+         Tablero tablero = new Tablero(columnas,filas);
 
          
          pantalla.setStyle("-fx-font-size:20px;");
@@ -276,4 +300,21 @@ public class ScreenController {
      
     }
     
+    
+    
+    public Pane generarLeaderBoard(){
+        VBox fondo=new VBox();
+        fondo.setAlignment(Pos.CENTER);
+        Label titulo=generateH1("Leaderboard");
+        
+        
+        Button btn_back=new Button("back");
+        
+        btn_back.setOnAction(u->{
+            changeScene(0);
+        });
+                
+        fondo.getChildren().addAll(btn_back,titulo);
+        return fondo;
+    }
 }

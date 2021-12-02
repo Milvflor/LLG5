@@ -8,6 +8,7 @@ package sopadeletras5.Modalidad;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
@@ -142,7 +143,8 @@ public class Timer extends Thread {
     
     public void generarGUI(){
         TimerGUI=new HBox();
-        TimerGUI.setStyle("-fx-background-color:#FCC936;");
+        TimerGUI.setAlignment(Pos.CENTER);
+        TimerGUI.setStyle("-fx-background-color:#FCC936;-fx-font-weight:bold;");
         lbl_titulo=new Label("Tiempo ");
         lbl_Minutos=new Label(""+Minutos);
         lbl_separador=new Label(":");
