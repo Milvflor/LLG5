@@ -9,6 +9,10 @@ import Estructuras.ArrayList;
 import Estructuras.CircularLinkedList;
 import Estructuras.List;
 import Estructuras.Tupla;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Iterator;
 
 /**
@@ -18,6 +22,8 @@ import java.util.Iterator;
 public class Palabra {
     
     CircularMatrix<Character> box;
+    private static String RUTA = System.getProperty("user.dir") + "/src/data/"; 
+
     
     public Palabra(Integer f, Integer c){
         box = new CircularMatrix(f,c);
@@ -131,4 +137,17 @@ public class Palabra {
 //        System.out.println(indices.toString());
 
      }
+    
+    public List<String> cargarPalabras(String filename) throws FileNotFoundException, IOException {
+        List<String> palabras = new ArrayList<>();
+        
+        String row;
+        BufferedReader csvReader = new BufferedReader(new FileReader(RUTA + filename + ".csv"));
+        while ((row = csvReader.readLine()) != null) {
+            palabras.addLast(row);
+        }
+        csvReader.close();
+        
+        return palabras;
+    }
 }

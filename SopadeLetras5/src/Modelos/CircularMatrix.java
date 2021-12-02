@@ -83,7 +83,7 @@ public class CircularMatrix<E> {
         }
         string += "\n";
         List<E> current_pointer = matrix.get(0);
-
+        System.out.println(matrix.get(0));
         for (int i = 0; i < current_pointer.size(); i++) {
             string += "----+";
             for (int j = 0; j < matrix.size(); j++) {
