@@ -22,6 +22,8 @@ import java.util.Iterator;
 public class Palabra {
     
     CircularMatrix<Character> box;
+    List<String> palabras;
+    
     private static String RUTA = System.getProperty("user.dir") + "/src/data/"; 
 
     
@@ -136,9 +138,9 @@ public class Palabra {
 //
 //        System.out.println(indices.toString());
 
-     }
-    
-    public List<String> cargarPalabras(String filename) throws FileNotFoundException, IOException {
+    }
+        
+    public void cargarPalabras(String filename) throws FileNotFoundException, IOException {
         List<String> palabras = new ArrayList<>();
         
         String row;
@@ -148,6 +150,6 @@ public class Palabra {
         }
         csvReader.close();
         
-        return palabras;
+        this.palabras = palabras;
     }
 }
