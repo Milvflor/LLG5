@@ -24,7 +24,7 @@ public class CircularMatrix<E> {
      *
      */
     public CircularMatrix() {
-        matrix = new CircularLinkedList<>();
+        matrix = new ArrayList<>();
     }
 
     public CircularMatrix(int cols, int rows) {

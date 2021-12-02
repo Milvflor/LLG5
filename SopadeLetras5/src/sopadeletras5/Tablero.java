@@ -6,6 +6,7 @@ package sopadeletras5;
 
 import Modelos.CircularMatrix;
 import Estructuras.*;
+import Modelos.Palabra;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,6 +24,8 @@ public class Tablero {
     private int col, row;
     
     GridPane grid;   
+    
+    private Palabra palabras;
 
     /**
      *
@@ -53,6 +56,14 @@ public class Tablero {
         }
         return grid;
 
+    }
+    
+    public void getHint(){
+        for(int i = 0; i < this.col; i++){
+            for(int j = 0; j < this.row; j++){
+                for()
+            }
+        }
     }
 
     /**
