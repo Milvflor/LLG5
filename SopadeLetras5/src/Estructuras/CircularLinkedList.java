@@ -22,9 +22,9 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
      */
     public CircularLinkedList() {
         currentSize = 0;
-        last = null;
-        currentPointer = null;
     }
+    
+ 
 
     /**
      *
@@ -57,7 +57,7 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
     public void setLast(CircularNodeList<E> last) {
         this.last = last;
         this.last.setNext(this.last);
-        this.last.setPrevious(this.last);
+        this.last.setPrevious(this.last);        
     }
 
     /**
@@ -67,15 +67,13 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
      */
     @Override
     public boolean addFirst(E e) {
-
-        if (e == null) {
-            return false;
-        }
-
+        
+        if(e == null){return false;}
+        
         CircularNodeList<E> new_elem = new CircularNodeList<E>(e);
-        if (this.last != null) {
+        if(this.last != null){       
             this.last.getNext().setPrevious(new_elem);
-            this.last.setNext(new_elem);
+            this.last.setNext(new_elem); 
         } else {
             this.setLast(new_elem);
         }
@@ -93,11 +91,12 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
         if (e == null) {
             return false;
         }
-
+        
         CircularNodeList<E> new_node = new CircularNodeList<E>(e);
-
-        if (this.last != null) {
-
+        
+        if(this.last != null){
+            
+            
             new_node.setNext(last.getNext());
             new_node.setPrevious(last);
             last.getNext().setPrevious(new_node);
@@ -182,13 +181,13 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
      */
     @Override
     public E get(int index) {
-        if (index < 0 || index > this.currentSize) {
+        if(index < 0 || index > this.currentSize){
             return null;
         }
-
+        
         CircularNodeList<E> pointer = this.getFirst();
-
-        for (int i = 0; i < index; i++) {
+        
+        for(int i = 0; i < index; i++){
             pointer = pointer.getNext();
         }
         return pointer.getContent();
@@ -202,13 +201,13 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
      */
     @Override
     public boolean set(int index, E element) {
-        if (index < 0 || index > this.currentSize) {
+        if(index < 0 || index > this.currentSize){
             return false;
         }
-
+        
         CircularNodeList<E> pointer = this.getFirst();
-
-        for (int i = 0; i < index; i++) {
+        
+        for(int i = 0; i < index; i++){
             pointer = pointer.getNext();
         }
         pointer.setContent(element);
@@ -242,63 +241,19 @@ public class CircularLinkedList<E> implements List<E>, Iterable {
      */
     @Override
     public Iterator iterator() {
-        Iterator<E> it = new Iterator<E>() {
-            CircularNodeList<E> n = last.getNext();
-            int cursor = 0;
-
+        Iterator<E> i = new Iterator<E>(){
             @Override
             public boolean hasNext() {
-                return cursor < currentSize;
+                return true;
             }
 
             @Override
             public E next() {
-                E r = n.getContent();
-                n = n.getNext();
-                cursor++;
-                return r;
+                currentPointer = currentPointer.getNext();
+                return currentPointer.getContent();
             }
         };
-        return it;
-    }
-
-    public void move(Integer n) {
-        CircularNodeList<E> current = last;
-
-        for (int i = 1; i < n; i++) {
-            this.last.setNext(current.getPrevious());
-            current = this.last.getNext();
-        }
-
-    }
-
-    public void full(E data, int lenght) {
-
-        for (int i = 0; i < lenght; i++) {
-            this.addLast(data);
-        }
-
-    }
-
-    public static void main(String[] args) {
-
-        CircularLinkedList<Integer> l = new CircularLinkedList();
-
-//        l.addLast("1");
-//        l.addLast("2");
-//        l.addLast("3");
-//        l.addLast("4");
-//        l.addLast("5");
-//        l.addLast("6");
-//        l.addLast("7");
-//        l.desplazar(3);
-        l.full(0, 5);
-        System.out.println(l.toString());
-    }
-
-    @Override
-    public void replace(Integer i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return i;
     }
 
 }

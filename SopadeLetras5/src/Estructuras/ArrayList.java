@@ -221,17 +221,5 @@ public class ArrayList<E> implements List<E>, Iterable{
         };
         return it;
     }
-
-    
-
-    @Override
-    public void replace(Integer i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void move(Integer n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

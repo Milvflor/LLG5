@@ -250,6 +250,13 @@ public class CircularLinkedList2<E> implements List<E>, Iterable {
             start = current.getPrevious();
             current = start;
         }
+        
+        CircularNodeList<E> current2 = start;
+        
+        for (int i = 1; i < currentSize-1; i++) {
+            last = current2.getPrevious();
+            current = last;
+        }
     
     }
     
@@ -324,12 +331,24 @@ public class CircularLinkedList2<E> implements List<E>, Iterable {
         l.addLast("5");
         l.addLast("6");
         l.addLast("7");
-//        l.desplazar(3);
+        l.addLast("8");
+        l.addLast("9");
+        
+        
+        
 
 //        l.full(0, 5);
         System.out.println(l.toString());
-        l.replaceV(0, "A");
+        System.out.println(l.start);
+        System.out.println(l.last);
+        
+        
+        l.replaceV(8, "A");
+        
+        l.desplazar(3);
         System.out.println(l.toString());
+        System.out.println(l.start);
+        System.out.println(l.last);
         
 }
 

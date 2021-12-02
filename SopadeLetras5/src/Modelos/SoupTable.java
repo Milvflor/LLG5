@@ -17,7 +17,7 @@ import java.util.Map;
  *
  * @author Kevin Zhang
  */
-public class Palabra {
+public class SoupTable {
 
     private CircularMatrix2<Character> box;
     private ArrayList<String> rezagadas;
@@ -25,13 +25,13 @@ public class Palabra {
     private Character[] abece = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};  
     
 
-    public Palabra(Integer f, Integer c) {
+    public SoupTable(Integer f, Integer c) {
         box = new CircularMatrix2(f, c);
         rezagadas = new ArrayList<>();
         almacenadas = new ArrayList<>();
     }
 
-    public void cargarPalabras(ArrayList<String> data) {
+    private void cargarPalabras(ArrayList<String> data) {
         CircularLinkedList2<Character> array_;
         int insertadas = 0;
 
@@ -61,7 +61,7 @@ public class Palabra {
         System.out.println(box.toString());
     }
 
-    public static CircularLinkedList2<Character> insertWord(String w, Integer lenght_max) {
+    private static CircularLinkedList2<Character> insertWord(String w, Integer lenght_max) {
 
         CircularLinkedList2<Character> l = new CircularLinkedList2<Character>();
         if (w.length() > lenght_max) {
@@ -84,11 +84,11 @@ public class Palabra {
         return l;
     }
 
-    public void shuffleF() {
+    private void shuffleF() {
         box.desordenar();
     }
 
-    public ArrayList<Tupla<Integer, Integer>> getNullsIndex() {
+    private ArrayList<Tupla<Integer, Integer>> getNullsIndex() {
 
         CircularLinkedList2<Character> tmp;
 
@@ -110,7 +110,7 @@ public class Palabra {
         return r;
     }
 
-    public static Map<Integer, ArrayList> agruparIndices(ArrayList<Tupla<Integer, Integer>> indices) {
+    private static Map<Integer, ArrayList> agruparIndices(ArrayList<Tupla<Integer, Integer>> indices) {
         Map<Integer, ArrayList> mp = new HashMap<>();
 
         for (int i = 0; i < indices.size(); i++) {
@@ -126,7 +126,7 @@ public class Palabra {
         return mp;
     }
 
-    public static Map<Integer, ArrayList> consecutivos(ArrayList<Tupla> list) {
+    private static Map<Integer, ArrayList> consecutivos(ArrayList<Tupla> list) {
 
         Map<Integer, ArrayList> mp = new HashMap<>();
 
@@ -162,7 +162,7 @@ public class Palabra {
         return mp;
     }
 
-    public boolean addVertical(String palabra, ArrayList<Tupla> indices) {
+    private boolean addVertical(String palabra, ArrayList<Tupla> indices) {
 
         if (palabra.length() > indices.size() || indices.isEmpty() || palabra.isEmpty()) {
             return false;
@@ -175,7 +175,7 @@ public class Palabra {
         return true;
     }
 
-    public String getWord(Integer len_) {
+    private String getWord(Integer len_) {
         String s = "";
         for (int i = 0; i < this.rezagadas.size(); i++) {
             String r = rezagadas.get(i);
@@ -192,12 +192,17 @@ public class Palabra {
         return rezagadas;
     }
     
-    public void fuller(ArrayList<Tupla<Integer, Integer>> indices){
-        
-        for (int i = 0; i < indices.size(); i++) {
-            Integer posicion = (int)(Math.random() * abece.length);
-            Tupla indiceT = indices.get(i);
-            this.box.getMatrix().get((Integer) indiceT.getIzquierda()).replaceV((Integer) indiceT.getDerecha(), abece[posicion]); 
+    private void fuller(){
+        ArrayList<Tupla<Integer,Integer>> nulls = this.getNullsIndex();
+        for (int i = 0; i < nulls.size(); i++) {
+            Character letra = abece[(int)(Math.random() * abece.length)];
+            Tupla indiceT = nulls.get(i);
+            Integer f = (Integer)indiceT.getIzquierda();
+            Integer c = (Integer)indiceT.getDerecha();
+            CircularLinkedList2 a = this.box.getMatrix().get(f);
+//            System.out.println(a);
+            a.replaceV(c, letra); 
+//            System.out.println(a);
         }
     
     }
@@ -206,11 +211,44 @@ public class Palabra {
         return almacenadas;
     }
 
+    public void generate(ArrayList<String> palabras){
+        
+        //Agregando palabras rezagadas en Horizontal
+        this.cargarPalabras(palabras);
+        this.shuffleF();
+
+        ArrayList<Tupla<Integer, Integer>> r = this.getNullsIndex();
+        Map<Integer, ArrayList> mpIndicesAll = agruparIndices(r);
+        
+        //Agregando palabras rezagadas en Vertical
+        for (Integer i : mpIndicesAll.keySet()) {
+            Map<Integer, ArrayList> m = consecutivos(mpIndicesAll.get(i));
+            if (!m.isEmpty()) {
+
+                for (Integer f : m.keySet()) {
+                    ArrayList a = m.get(f);
+                    String s;
+                    s = this.getWord(a.size());
+
+                    if (s!="")this.addVertical(s, a);
+                }
+                
+            }
+        }
+        this.fuller();
+//        this.getTabla();    
+    }
+
+    public CircularMatrix2<Character> getBox() {
+        return box;
+    }
+    
     
     public static void main(String[] args) {
 
-        Palabra b = new Palabra(7, 9);
-
+        SoupTable b = new SoupTable(7, 9);
+        
+//
         ArrayList<String> palabras = new ArrayList();
         palabras.addLast("hola");
         palabras.addLast("maleta");
@@ -225,46 +263,9 @@ public class Palabra {
         palabras.addLast("PLATILLO");
         palabras.addLast("PELUCA");
         palabras.addLast("VENTANA");
-
-        System.out.println("Cargando palabras horizontales\n");
-        b.cargarPalabras(palabras);
-        b.getTabla();System.out.println(b.getAlmacenadas());
-        System.out.println(b.getRezagadas());
         
-        System.out.println("Revolviendo filas de la matriz\n");
-        b.shuffleF();
-        b.getTabla();System.out.println(b.getAlmacenadas());
-        System.out.println(b.getRezagadas());
-
-        ArrayList<Tupla<Integer, Integer>> r = b.getNullsIndex();
-        System.out.println(r);
-
-        Map<Integer, ArrayList> mpIndicesAll = agruparIndices(r);
-        System.out.println(mpIndicesAll);
-
-        System.out.println("Agregando palabras rezagadas en Vertical");
-        System.out.println(b.getAlmacenadas());
-        System.out.println(b.getRezagadas());
-        for (Integer i : mpIndicesAll.keySet()) {
-            Map<Integer, ArrayList> m = consecutivos(mpIndicesAll.get(i));
-            if (!m.isEmpty()) {
-
-                for (Integer f : m.keySet()) {
-                    ArrayList a = m.get(f);
-                    String s;
-                    s = b.getWord(a.size());
-                    
-                    System.out.println(m);
-                    if (s!="")b.addVertical(s, a);
-                }
-                
-            }
-        }
+        b.generate(palabras);
         b.getTabla();
-        
-        System.out.println("");
-        b.fuller(b.getNullsIndex());
-        b.getTabla();
-        System.out.println(b.getAlmacenadas());
+
     }
 }
