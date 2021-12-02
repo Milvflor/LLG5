@@ -10,18 +10,20 @@ package Estructuras;
  */
 public class Tupla<E, T> {
     
-    E derecha;
     T izquierda;
+    E derecha;
     
-    public Tupla(E d, T i){
-        this.derecha = d;
+    
+    public Tupla(T i, E d){
         this.izquierda = i;
+        this.derecha = d;
+        
     }
     
     @Override
     public String toString(){
         String s= "";
-        s += "("+ this.derecha + ", " + this.izquierda + ")";       
+        s += "("+ this.izquierda + ", " + this.derecha + ")";       
         return s;
     }
     
@@ -30,6 +32,24 @@ public class Tupla<E, T> {
     public boolean sameD(Tupla a){
         return a.derecha == this.derecha;
     }
+
+    public E getDerecha() {
+        return derecha;
+    }
+
+    public void setDerecha(E derecha) {
+        this.derecha = derecha;
+    }
+
+    public T getIzquierda() {
+        return izquierda;
+    }
+
+    public void setIzquierda(T izquierda) {
+        this.izquierda = izquierda;
+    }
+    
+    
     
     
 }
