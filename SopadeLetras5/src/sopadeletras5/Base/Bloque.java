@@ -38,10 +38,22 @@ public class Bloque {
         panel = new StackPane();
         panel.setPrefSize(70, 70);
         panel.setAlignment(Pos.CENTER);
+        
+        panel.setOnDragDetected(e -> {
+            System.out.println("AAAA");
+            if (timeSelected == 0) {
+                System.out.println("BBBB");
+                seleccionados.addLast(this.caracter);
+                timeSelected++;
+                select();
+            }
+
+        });
 
         panel.setOnDragEntered(e -> {
-
+            System.out.println("AAAA");
             if (timeSelected == 0) {
+                System.out.println("BBBB");
                 seleccionados.addLast(this.caracter);
                 timeSelected++;
                 select();
@@ -71,7 +83,6 @@ public class Bloque {
     }
 
     public void select() {
-        System.out.println("aaaa");
         cuadro.setFill(Paint.valueOf("yellow"));
     }
 
