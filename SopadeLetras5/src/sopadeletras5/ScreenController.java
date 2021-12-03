@@ -30,6 +30,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import sopadeletras5.Base.Bloque;
 import sopadeletras5.Base.Jugador;
 import sopadeletras5.Modalidad.Timer;
 
@@ -203,16 +204,16 @@ public class ScreenController {
     private Pane generateLobby() {
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
-        
+
         VBox espacio = new VBox();
         espacio.setPrefHeight(100);
         HBox fila2 = new HBox();
-        
+
         HBox fila1 = new HBox();
         fila1.setAlignment(Pos.CENTER);
         fila1.setPadding(new Insets(20, 20, 20, 20));
         fila1.setSpacing(20);
-        
+
         fila2.setAlignment(Pos.CENTER);
         fila2.setSpacing(20);
 
@@ -220,7 +221,7 @@ public class ScreenController {
         filaCat.setAlignment(Pos.CENTER);
         filaCat.setPadding(new Insets(20, 20, 20, 20));
         filaCat.setSpacing(20);
-        
+
         Label seleccionarCategoria = new Label("Seleccionar Categoria");
 
         ObservableList<String> options
@@ -231,7 +232,7 @@ public class ScreenController {
         categoria = new ComboBox(options);
 
         filaCat.getChildren().addAll(seleccionarCategoria, categoria);
-        
+
         Label titulo = generateH1("Dimensiones del tablero");;
 
         Label lbl_fila = new Label("Filas");
@@ -264,9 +265,9 @@ public class ScreenController {
 
         fila1.getChildren().addAll(lbl_fila, txt_fila);
         fila2.getChildren().addAll(lbl_columna, txt_columna);
-        
+
         root.setStyle("-fx-font-weight:bold;-fx-font-size:20px;");
-        root.getChildren().addAll(titulo,filaCat ,fila1, fila2, espacio, btn_jugar);
+        root.getChildren().addAll(titulo, filaCat, fila1, fila2, espacio, btn_jugar);
 
         return root;
     }
@@ -283,10 +284,10 @@ public class ScreenController {
 
         int filas = Integer.parseInt(txt_fila.getText());
         int columnas = Integer.parseInt(txt_columna.getText());
-        
+
         String catSelec = categoria.getValue().toString();
         String cat = "";
-        switch(catSelec){
+        switch (catSelec) {
             case "Comida":
                 cat = "food";
                 break;
@@ -297,7 +298,7 @@ public class ScreenController {
                 cat = "random";
                 break;
         }
-        
+
         Tablero tablero = new Tablero(columnas, filas, cat);
         tablero.getTabla();
         System.out.println(tablero.getTabla().getAlmacenadas());
@@ -315,11 +316,27 @@ public class ScreenController {
         Timer tiempo = new Timer(0, 5, 30);
         tiempo.start();
 
-        //Jugador
+        Button revisar = new Button("Revisar");
+
         Jugador player1 = new Jugador("Hugo");
         pantalla.setLeft(player1.getScore().getScoreGUI());
 
-        lado_derecho.getChildren().addAll(player1.getScore().getScoreGUI(), tiempo.getTimerGUI());
+        revisar.setOnAction((e) -> {
+            String s = "";
+
+            for (int i = 0; i < Bloque.seleccionados.size(); i++) {
+                s += Bloque.seleccionados.get(i);
+            }
+
+            for (int j = 0; j < tablero.getTabla().getAlmacenadas().size(); j++) {
+                if (tablero.getTabla().getAlmacenadas().get(j).compareTo(s) == 0) {
+                    player1.getScore().addPoints(s);
+                }
+            }
+        });
+
+        //Jugador
+        lado_derecho.getChildren().addAll(player1.getScore().getScoreGUI(), tiempo.getTimerGUI(), revisar);
         pantalla.setRight(lado_derecho);
 
         return pantalla;
