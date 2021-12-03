@@ -6,7 +6,11 @@ package sopadeletras5;
 
 import Modelos.CircularMatrix;
 import Estructuras.*;
-import Modelos.Palabra;
+import Modelos.CircularMatrix2;
+import Modelos.SoupTable;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,26 +24,36 @@ import sopadeletras5.Base.Bloque;
  */
 public class Tablero {
 
-    private CircularMatrix<Character> matrix;
     private int col, row;
-    
-    GridPane grid;   
-    
-    private Palabra palabras;
+    GridPane grid;
+    private SoupTable tabla;
 
     /**
      *
      * @param col
      * @param row
      */
-    public Tablero(int col, int row) {
+    public Tablero(int col, int row, String cat) {
         this.col = col;
-        this.row = row;       
+        this.row = row;
+        tabla = new SoupTable(col, row);
         
-        matrix = new CircularMatrix<Character>(col, row);
-        matrix.zerosInit('e');
-        
+        try {
+            tabla.generate(tabla.cargarPalabras(cat));
+        } catch (IOException ex) {
+            Logger.getLogger(Tablero.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         grid = this.drawBoard();
+
+    }
+
+    public SoupTable getTabla() {
+        return tabla;
+    }
+
+    public void setTabla(SoupTable tabla) {
+        this.tabla = tabla;
     }
 
     private GridPane drawBoard() {
@@ -48,38 +62,13 @@ public class Tablero {
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(2);
         grid.setVgap(2);
-        for (int i = 0; i < col ; i++) {
-            for (int j = 0; j < row ; j++) {
-                Bloque cell = new Bloque(matrix.getMatrix().get(i).get(j).toString());
-                grid.add(cell.getPanel(), i, j,1,1);
+        for (int i = 0; i < col; i++) {
+            for (int j = 0; j < row; j++) {
+                Bloque cell = new Bloque(tabla.getBox().getMatrix().get(i).get(j).toString());
+                grid.add(cell.getPanel(), i, j, 1, 1);
             }
         }
         return grid;
-
-    }
-    
-    public void getHint(){
-        for(int i = 0; i < this.col; i++){
-            for(int j = 0; j < this.row; j++){
-                for()
-            }
-        }
-    }
-
-    /**
-     *
-     * @return
-     */
-    public CircularMatrix getMatrix() {
-        return matrix;
-    }
-
-    /**
-     *
-     * @param matrix
-     */
-    public void setMatrix(CircularMatrix matrix) {
-        this.matrix = matrix;
     }
 
     /**

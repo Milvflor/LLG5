@@ -8,7 +8,7 @@ import Estructuras.CircularLinkedList;
 import Modelos.CircularMatrix;
 import Estructuras.CircularNodeList;
 import Estructuras.List;
-import Modelos.Palabra;
+import Modelos.SoupTable;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,19 +31,6 @@ public class SopadeLetras5 extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
-        Tablero tablero = new Tablero(5, 4);
-
-        tablero.getMatrix().put(1, 2, 'Z');
-        System.out.println(tablero.getMatrix());
-
-        Palabra palabras = new Palabra(1,1);
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        try {
-            palabras.cargarPalabras("food");
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
 
         Button btn = new Button();
         btn.setText("INICIAR");

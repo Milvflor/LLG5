@@ -26,7 +26,6 @@ public class ArrayList<E> implements List<E>, Iterable{
         this.elements = (E[]) (new Object[capacity]);
         this.effectiveSize = 0;
     }
-
     
     private boolean isFull(){
         return this.effectiveSize == this.capacity;
@@ -62,6 +61,12 @@ public class ArrayList<E> implements List<E>, Iterable{
         elements [0] = e;
         effectiveSize++;
         return true;   
+    }
+    
+    public boolean replace(Integer index, E value){
+        if (this.isEmpty() || index>effectiveSize || index==null || value==null) return false;
+        elements[index] = value;
+        return true;
     }
 
     /**
@@ -125,7 +130,7 @@ public class ArrayList<E> implements List<E>, Iterable{
         this.effectiveSize = 0;
     }
     
-    public void replace(Integer i){
+    public void intercambiar(Integer i){
         Integer randomNum = (int)(Math.random() * effectiveSize);
         E d1 = elements[i];
         E d2 = elements[randomNum];
@@ -151,7 +156,14 @@ public class ArrayList<E> implements List<E>, Iterable{
      */
     @Override
     public E remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if (index>effectiveSize) return null;
+        E v = elements[index];
+        for (int i = index; i < effectiveSize; i++) {
+            elements[i] = elements[i+1];
+        }
+        effectiveSize--;
+        return v;
     }
 
     /**
@@ -208,11 +220,6 @@ public class ArrayList<E> implements List<E>, Iterable{
             }     
         };
         return it;
-    }
-
-    @Override
-    public void move(Integer n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
