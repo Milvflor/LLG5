@@ -5,6 +5,8 @@
  */
 package sopadeletras5.Base;
 
+import Estructuras.ArrayList;
+import Estructuras.List;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -16,60 +18,64 @@ import javafx.scene.shape.Rectangle;
  * @author Usuario
  */
 public class Bloque {
-    
+
     private StackPane panel;
     private Rectangle cuadro;
     private Label letra;
-    private boolean isSelected;
-    
-    
-    public Bloque(String letra){
+    private String caracter;
+    private int timeSelected;
+
+    public static List<String> seleccionados = new ArrayList<>();
+
+    public Bloque(String letra) {
         crearBloque();
         this.letra.setText(letra);
-        isSelected=false;
+        timeSelected = 0;
+        caracter = letra;
     }
-    
-    public void crearBloque(){
-        panel=new StackPane();
+
+    public void crearBloque() {
+        panel = new StackPane();
         panel.setPrefSize(70, 70);
         panel.setAlignment(Pos.CENTER);
-        
-        panel.setOnMouseEntered(e->{
-            if(panel.isPressed()){
+
+        panel.setOnDragEntered(e -> {
+
+            if (timeSelected == 0) {
+                seleccionados.addLast(this.caracter);
+                timeSelected++;
                 select();
             }
+
+        });
+
+        panel.setOnDragExited(e -> {
             
         });
-        
-        
-        cuadro=new Rectangle(70,70);
+
+        cuadro = new Rectangle(70, 70);
         cuadro.setFill(Paint.valueOf("white"));
 //        cuadro.setStroke(Paint.valueOf("black"));
 //        cuadro.setStrokeWidth(2);
-        
-        letra=new Label();
+
+        letra = new Label();
         letra.setAlignment(Pos.CENTER);
         letra.setTextFill(Paint.valueOf("black"));
 
-        panel.getChildren().addAll(cuadro,letra);
-        
-        
+        panel.getChildren().addAll(cuadro, letra);
+
     }
 
     public StackPane getPanel() {
         return panel;
     }
-    
-    public void select(){
+
+    public void select() {
+        System.out.println("aaaa");
         cuadro.setFill(Paint.valueOf("yellow"));
-        isSelected=true;
     }
-    
-    public boolean IsSelected(){
-        return isSelected;
-    }
-    
-    public void desactivar(){
+
+    public void desactivar() {
         this.panel.setDisable(true);
     }
 }
